@@ -1,9 +1,20 @@
+/*
+ ******************************************************************************
+ * file      : main.c
+ * project   : EE 329 S'23 A1
+ * details   : continuous LED blinking, first coding exercise
+ * authors   : Wilson Szeto (student) - wiszeto@calpoly.edu
+ * version   : 0.1
+ * date      : April 7, 2023
+ * compiler  : STM32CubeIDE Version: 1.10.1 (2022)
+ * target    : NUCLEO-L4A6ZG
+ ******************************************************************************
+ */
 #include "main.h"
 
 void SystemClock_Config(void);
 
-int main(void)
-{
+int main(void) {
 
   HAL_Init();
   SystemClock_Config();
@@ -33,10 +44,10 @@ int main(void)
   GPIOC->MODER &= ~(GPIO_MODER_MODE3);
   GPIOC->MODER |= (GPIO_MODER_MODE3_0);
 
-  uint8_t count = 0;
-  uint32_t delay = 100000;
+  uint8_t count = 0;       // initialize count
+  uint32_t delay = 100000; // add software delay
   while (1) {
-    if (count == 16) { // if the count goes equals 16, turn it back to 1
+    if (count == 16) { // if the count goes equals 16, turn it back to 0
       count = 0;
     }
 
@@ -49,14 +60,11 @@ int main(void)
   }
 }
 
-
-void SystemClock_Config(void)
-{
+void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
-  {
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK) {
     Error_Handler();
   }
 
@@ -65,36 +73,29 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
 
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK |
+                                RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-  {
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK) {
     Error_Handler();
   }
 }
 
-void Error_Handler(void)
-{
+void Error_Handler(void) {
   __disable_irq();
-  while (1)
-  {
+  while (1) {
   }
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 
-void assert_failed(uint8_t *file, uint32_t line)
-{
-
-}
+void assert_failed(uint8_t *file, uint32_t line) {}
 #endif
