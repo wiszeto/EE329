@@ -8,8 +8,6 @@ int main(void)
   HAL_Init();
   SystemClock_Config();
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
 
   /* Enable Clk*/
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOAEN);
@@ -23,12 +21,12 @@ int main(void)
   GPIOB->BRR = GPIO_PIN_10;
   while (1)
   {
-      int output = keypad_read(); //get key value
+      int output = keypad_read(4, 3); //get key value
       if (output != -1){
       // count++;
-          set_leds(output); //set leds to value
+          // set_leds(output); //set leds to value
       }
-      set_leds(0); //if key not pressed set leds to 0
+      //set_leds(0); //if key not pressed set leds to 0
   }
 }
 

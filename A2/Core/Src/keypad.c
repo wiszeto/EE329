@@ -1,5 +1,4 @@
 #include "keypad.h"
-#include <stdio.h>
 
 
 static const int keys[4][3] = {{1, 2, 3},
