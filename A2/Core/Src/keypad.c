@@ -1,22 +1,17 @@
 #include "keypad.h"
 
-
-static const int keys[4][3] = {{1, 2, 3},
+//Allocated values corresponding to button push
+static const int keys[4][3] = {{1, 2, 3}, 
                                {4, 5, 6},
                                {7, 8, 9},
                                {0xE, 0, 0xF}};
 
-static    int cols[4] = {Col1, Col2, Col3};
-static    int rows[4] = {Row1, Row2, Row3, Row4};
+static    int cols[3] = {Col1, Col2, Col3}; //corresponds to GPIO pins
+static    int rows[4] = {Row1, Row2, Row3, Row4}; //coressponds to GPIO pins
 static    int delay_time = 10000;
 
-void ayo() {
-
-}
+//This function, configures row, column and keypad pin
 void keypad_init() {
-    /*
-     * This function, configures row, column and keypad pin
-    */
 
     //Making column pins output mode bits(01)
     COL_PORT->MODER &= ~(GPIO_MODER_MODE13 | GPIO_MODER_MODE14 | GPIO_MODER_MODE15);
@@ -31,22 +26,22 @@ void keypad_init() {
 }
 
 int keypad_read(int cols, int row){
-    COL_PORT -> BSRR = (Col1 |Col2|Col3); //set columns to high value
+    COL_PORT -> BSRR = (Col1 |Col2|Col3); //outputs column pins to high
 
     //check if key is pressed
     if (ROW_PORT->IDR){
 
+      //debounce delay
     	for (int delay = 0; delay < delay_time; delay++);
 
     	//rechecks if key is presses still for debounce
     	if (ROW_PORT->IDR){
-    		//turn off columns
-    		COL_PORT->BRR = (Col1 |Col2|Col3);
-    		return check_row_col(NUM_OF_COLS, NUM_OF_ROWS);
+    		COL_PORT->BRR = (Col1 |Col2|Col3); //turn off columns
+    		
+        //returns array position of keypress
+        return check_row_col(NUM_OF_COLS, NUM_OF_ROWS);  
     	}
-    	return -1; //might be redundant
     }
-    GPIOB->BRR = GPIO_PIN_10;
     return -1;
 }
 
@@ -56,7 +51,7 @@ int check_row_col(int col, int row){
         COL_PORT->BSRR = cols[c]; //turn on the column
         for (int r=0; r < row; r++){ //Check if key pressed is in the row
             if (ROW_PORT->IDR & (rows[r])) { //Check if key pressed is in the row
-               return keys[r][c];
+               return keys[r][c]; //returns array position of keypress
             }
         }
     }
