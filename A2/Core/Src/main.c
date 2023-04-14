@@ -34,7 +34,7 @@ int keypad_read(int cols, int row){
     COL_PORT -> BSRR = (Col1 |Col2|Col3); //set columns to high value
 
     //check if key is pressed
-    if (ROW_PORT->IDR & (Row1|Row2|Row3|Row4)){
+    if (ROW_PORT->IDR){
 
         //turn off columns
         COL_PORT->BRR = (Col1 |Col2|Col3);
@@ -49,7 +49,7 @@ int check_row_col(int col, int row){
     for (int c=0; c < col; c++){
         COL_PORT->BSRR = cols[c]; //turn on the column
         for (int r=0; r < row; r++){ //Check if key pressed is in the row
-            if (ROW_PORT->IDR & (rows[r])) { //Check if key pressed is in the row
+            if (ROW_PORT->IDR) { //Check if key pressed is in the row
                return keys[r][c];
             }
         }
@@ -70,10 +70,7 @@ int main(void)
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOCEN);
 
   /*Configure LED Output*/
-  GPIOB-> MODER &= ~(GPIO_MODER_MODE3 |GPIO_MODER_MODE5 | GPIO_MODER_MODE4 | GPIO_MODER_MODE10);
-  GPIOB-> MODER |= (GPIO_MODER_MODE3_0 |GPIO_MODER_MODE5_0 | GPIO_MODER_MODE4_0 | GPIO_MODER_MODE10_0);
   keypad_init();
-  GPIOB->BRR = GPIO_PIN_10;
   while (1)
   {
       int output = keypad_read( 4, 3); //get key value
