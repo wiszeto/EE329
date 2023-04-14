@@ -1,9 +1,33 @@
+/*
+ ******************************************************************************
+ * file      : main.c
+ * project   : EE 329 S'23 A2
+ * details   : Keypad push displayed binary value to LEDs
+ * authors   : James Savella - savella@calpoly.edu
+ *             Wilson Szeto  - wiszeto@calpoly.edu
+ * version   : 0.1
+ * date      : 230414
+ * compiler  : STM32CubeIDE Version: 1.12.1 (2022)
+ * target    : NUCLEO-L4A6ZG
+ ******************************************************************************
+ * wiring    :
+ * LED Output Pins
+ * PA0 - CN10-29 - LED Pin 1 
+ * PA1 - CN10-11 - LED Pin 2
+ * PA2 - CN10-13 - LED Pin 3
+ * PA3 - CN9-1   - LED Pin 4
+ ******************************************************************************
+ * origins   :
+ * modified from CubeIDE auto-generated main.c  (c) 2022 STMicro.
+ ******************************************************************************
+ */
+
 #include "main.h"
 #include "keypad.h"
 
 void SystemClock_Config(void);
 
-int set_leds(uint32_t);
+int set_leds(uint32_t); //value to display onto LEDs
 
 int main(void)
 {
