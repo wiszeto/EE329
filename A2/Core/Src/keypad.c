@@ -1,3 +1,31 @@
+/*
+ ******************************************************************************
+ * file      : keypad.c
+ * project   : EE 329 S'23 A2
+ * details   : Keypad push displayed binary value to LEDs
+ * authors   : James Savella - savella@calpoly.edu
+ *             Wilson Szeto  - wiszeto@calpoly.edu
+ * version   : 0.1
+ * date      : 230414
+ * compiler  : STM32CubeIDE Version: 1.12.1 (2022)
+ * target    : NUCLEO-L4A6ZG
+ ******************************************************************************
+ * wiring    :
+ * Column Output Pins
+ * PB15 - CN7-3 - Column Pin 1 
+ * PB13 - CN7-5 - Column Pin 2
+ * PB12 - CN7-7 - Column Pin 3
+ * Row Input Pins
+ * PC0 - CN9-3 - Row Pin 1
+ * PC1 - CN9-7 - Row Pin 2
+ * PC2 - CN10-9 - Row Pin 3
+ * PC3 - CN9-5 - Row Pin 4
+ ******************************************************************************
+ * origins   :
+ * modified from CubeIDE auto-generated main.c  (c) 2022 STMicro.
+ ******************************************************************************
+ */
+
 #include "keypad.h"
 
 //Allocated values corresponding to button push
