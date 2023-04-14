@@ -21,9 +21,9 @@
 #define Row4 GPIO_PIN_3 // Row 4 pin
 
 // Macro definitions for column pins
-#define Col1 GPIO_PIN_13 // Column 1 pin
-#define Col2 GPIO_PIN_14 // Column 2 pin
-#define Col3 GPIO_PIN_15 // Column 3 pin
+#define Col1 GPIO_PIN_15 // Column 1 pin
+#define Col2 GPIO_PIN_13 // Column 2 pin
+#define Col3 GPIO_PIN_12 // Column 3 pin
 
 void keypad_init();
 int keypad_read(int cols, int row);
