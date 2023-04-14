@@ -17,13 +17,12 @@ int main(void)
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOBEN);
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOCEN);
 
-  /*Configure LED Output*/
+  //Initializes keypad functions, variables
   keypad_init();
   while (1)
   {
       int output = keypad_read( 4, 3); //get key value
-      if (output != -1){
-      // count++;
+      if (output != -1){ //if button is pushed sets value to dispaly to LED
           set_leds(output); //set leds to value
       }
       else {set_leds(0);} //if key not pressed set leds to 0
