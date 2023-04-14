@@ -1,6 +1,4 @@
-../Core/Src/keypad.c:12:6:keypad_init	4	static
-../Core/Src/keypad.c:29:5:keypad_read	16	static
-../Core/Src/keypad.c:44:5:check_row_col	24	static
-../Core/Src/main.c:5:5:main	16	static
-../Core/Src/main.c:34:6:SystemClock_Config	96	static
-../Core/Src/main.c:68:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:8:5:main	16	static
+../Core/Src/main.c:33:5:set_leds	16	static
+../Core/Src/main.c:57:6:SystemClock_Config	96	static
+../Core/Src/main.c:91:6:Error_Handler	4	static,ignoring_inline_asm

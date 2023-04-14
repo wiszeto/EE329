@@ -25,9 +25,8 @@
 #define Col2 GPIO_PIN_14 // Column 2 pin
 #define Col3 GPIO_PIN_15 // Column 3 pin
 
-// Function declarations (prototypes)
-void keypad_init();                // Initialize the keypad
-int keypad_read();                 // Read the keypad input
-int check_row_col(int col, int row); // Check if a particular row and column combination is pressed
+void keypad_init();
+int keypad_read(int cols, int row);
+int check_row_col(int col, int row);
 
 #endif // End of header guards

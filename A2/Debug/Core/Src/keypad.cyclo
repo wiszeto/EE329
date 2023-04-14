@@ -1,3 +1,4 @@
-keypad.c:12:6:keypad_init	1
-keypad.c:29:5:keypad_read	2
-keypad.c:44:5:check_row_col	4
+keypad.c:13:6:ayo	1
+keypad.c:16:6:keypad_init	1
+keypad.c:33:5:keypad_read	4
+keypad.c:54:5:check_row_col	4

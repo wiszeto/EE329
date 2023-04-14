@@ -8,7 +8,11 @@ static const int keys[4][3] = {{1, 2, 3},
 
 static    int cols[4] = {Col1, Col2, Col3};
 static    int rows[4] = {Row1, Row2, Row3, Row4};
+static    int delay_time = 10000;
 
+void ayo() {
+
+}
 void keypad_init() {
     /*
      * This function, configures row, column and keypad pin
@@ -30,11 +34,17 @@ int keypad_read(int cols, int row){
     COL_PORT -> BSRR = (Col1 |Col2|Col3); //set columns to high value
 
     //check if key is pressed
-    if (ROW_PORT->IDR & (Row1|Row2|Row3|Row4)){
+    if (ROW_PORT->IDR){
 
-        //turn off columns
-        COL_PORT->BRR = (Col1 |Col2|Col3);
-        return check_row_col(NUM_OF_COLS, NUM_OF_ROWS);
+    	for (int delay = 0; delay < delay_time; delay++);
+
+    	//rechecks if key is presses still for debounce
+    	if (ROW_PORT->IDR){
+    		//turn off columns
+    		COL_PORT->BRR = (Col1 |Col2|Col3);
+    		return check_row_col(NUM_OF_COLS, NUM_OF_ROWS);
+    	}
+    	return -1; //might be redundant
     }
     GPIOB->BRR = GPIO_PIN_10;
     return -1;
