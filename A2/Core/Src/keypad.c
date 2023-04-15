@@ -39,15 +39,20 @@ static    int delay_time = 10000;
 void keypad_init() {
 
     //Making column pins output mode bits(01)
-    COL_PORT->MODER &= ~(GPIO_MODER_MODE13 | GPIO_MODER_MODE14 | GPIO_MODER_MODE15);
-    COL_PORT->MODER |= (GPIO_MODER_MODE13_0 | GPIO_MODER_MODE14_0 | GPIO_MODER_MODE15_0);
+    COL_PORT->MODER &= ~(GPIO_MODER_MODE13 | GPIO_MODER_MODE14 
+                         | GPIO_MODER_MODE15);
+    COL_PORT->MODER |= (GPIO_MODER_MODE13_0 | GPIO_MODER_MODE14_0 
+                         | GPIO_MODER_MODE15_0);
 
     //Making row pins input mode bits(00)
-    ROW_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 | GPIO_MODER_MODE2 | GPIO_MODER_MODE3);
+    ROW_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 
+                        | GPIO_MODER_MODE2 | GPIO_MODER_MODE3);
 
     //enable pull-down resistor bits(10)
-    ROW_PORT->PUPDR &= (GPIO_PUPDR_PUPD0 | GPIO_PUPDR_PUPD1 | GPIO_PUPDR_PUPD2 | GPIO_PUPDR_PUPD3);
-    ROW_PORT->PUPDR |= (GPIO_PUPDR_PUPD0_1 | GPIO_PUPDR_PUPD1_1 | GPIO_PUPDR_PUPD2_1 | GPIO_PUPDR_PUPD3_1);
+    ROW_PORT->PUPDR &= (GPIO_PUPDR_PUPD0 | GPIO_PUPDR_PUPD1 
+                       | GPIO_PUPDR_PUPD2 | GPIO_PUPDR_PUPD3);
+    ROW_PORT->PUPDR |= (GPIO_PUPDR_PUPD0_1 | GPIO_PUPDR_PUPD1_1 
+                       | GPIO_PUPDR_PUPD2_1 | GPIO_PUPDR_PUPD3_1);
 }
 
 int keypad_read(int cols, int row){
