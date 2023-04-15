@@ -18,7 +18,25 @@ int main(void)
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOCEN);
 
   /*Configure LED Output*/
+  // Make pin0 output mode
+  GPIOA->MODER &= ~(GPIO_MODER_MODE0);
+  GPIOA->MODER |= (GPIO_MODER_MODE0_0);
+
+  // Make pin1 output mode
+  GPIOA->MODER &= ~(GPIO_MODER_MODE1);
+  GPIOA->MODER |= (GPIO_MODER_MODE1_0);
+
+  // Make pin2 output mode
+  GPIOA->MODER &= ~(GPIO_MODER_MODE2);
+  GPIOA->MODER |= (GPIO_MODER_MODE2_0);
+
+  // Make pin3 output mode
+  GPIOA->MODER &= ~(GPIO_MODER_MODE3);
+  GPIOA->MODER |= (GPIO_MODER_MODE3_0);
+
+  //initalize keypad variables
   keypad_init();
+
   while (1)
   {
       int output = keypad_read( 4, 3); //get key value
@@ -26,31 +44,13 @@ int main(void)
       // count++;
           set_leds(output); //set leds to value
       }
-      else {set_leds(0);} //if key not pressed set leds to 0
+      //else {set_leds(0);} //if key not pressed set leds to 0
   }
 }
 
 int set_leds(uint32_t number) {
-	  // Make pin0 output mode
-	  GPIOA->MODER &= ~(GPIO_MODER_MODE0);
-	  GPIOA->MODER |= (GPIO_MODER_MODE0_0);
-
-	  // Make pin1 output mode
-	  GPIOA->MODER &= ~(GPIO_MODER_MODE1);
-	  GPIOA->MODER |= (GPIO_MODER_MODE1_0);
-
-	  // Make pin2 output mode
-	  GPIOA->MODER &= ~(GPIO_MODER_MODE2);
-	  GPIOA->MODER |= (GPIO_MODER_MODE2_0);
-
-	  // Make pin3 output mode
-	  GPIOA->MODER &= ~(GPIO_MODER_MODE3);
-	  GPIOA->MODER |= (GPIO_MODER_MODE3_0);
-
-
 
 	  GPIOA->ODR = number; // changes all 16 port bits to count in binary
-
 
 }
 
