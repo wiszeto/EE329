@@ -1,0 +1,10 @@
+16:45:42 **** Incremental Build of configuration Debug for project A3 ****
+make -j16 all 
+arm-none-eabi-size   A3.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5288	     20	   1572	   6880	   1ae0	A3.elf
+Finished building: default.size.stdout
+ 
+
+16:45:42 Build Finished. 0 errors, 0 warnings. (took 168ms)
+

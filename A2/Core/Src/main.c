@@ -41,7 +41,6 @@ int main(void)
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOBEN);
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOCEN);
 
-<<<<<<< HEAD
   /*Configure LED Output*/
   // Make pin0 output mode
   GPIOA->MODER &= ~(GPIO_MODER_MODE0);
@@ -60,9 +59,9 @@ int main(void)
   GPIOA->MODER |= (GPIO_MODER_MODE3_0);
 
   //initalize keypad variables
-=======
+
   //Initializes keypad functions, variables
->>>>>>> 572f7a4a569accb3be0bfe4b38f3a0e2a6ca3276
+
   keypad_init();
 
   while (1)
