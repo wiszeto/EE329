@@ -43,20 +43,20 @@ int main(void)
 
   /*Configure LED Output*/
   // Make pin0 output mode
-  GPIOD->MODER &= ~(GPIO_MODER_MODE0);
-  GPIOD->MODER |= (GPIO_MODER_MODE0_0);
+  GPIOC->MODER &= ~(GPIO_MODER_MODE0);
+  GPIOC->MODER |= (GPIO_MODER_MODE0_0);
 
   // Make pin1 output mode
-  GPIOD->MODER &= ~(GPIO_MODER_MODE1);
-  GPIOD->MODER |= (GPIO_MODER_MODE1_0);
+  GPIOC->MODER &= ~(GPIO_MODER_MODE1);
+  GPIOC->MODER |= (GPIO_MODER_MODE1_0);
 
   // Make pin2 output mode
-  GPIOD->MODER &= ~(GPIO_MODER_MODE2);
-  GPIOD->MODER |= (GPIO_MODER_MODE2_0);
+  GPIOC->MODER &= ~(GPIO_MODER_MODE2);
+  GPIOC->MODER |= (GPIO_MODER_MODE2_0);
 
   // Make pin3 output mode
-  GPIOD->MODER &= ~(GPIO_MODER_MODE3);
-  GPIOD->MODER |= (GPIO_MODER_MODE3_0);
+  GPIOC->MODER &= ~(GPIO_MODER_MODE3);
+  GPIOC->MODER |= (GPIO_MODER_MODE3_0);
 
   //initalize keypad variables
 
@@ -76,7 +76,7 @@ int main(void)
 
 int set_leds(uint32_t number) {
 
-	  GPIOD->ODR = number; // changes all 16 port bits to count in binary
+	  GPIOC->ODR = number; // changes all 16 port bits to count in binary
 
 }
 

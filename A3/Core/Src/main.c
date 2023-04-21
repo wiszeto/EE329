@@ -1,52 +1,51 @@
 
 #include "main.h"
-
+#include "delay.h"
+#include "lcd.h"
+#include <stdint.h>
 void SystemClock_Config(void);
 
 int main(void)
 {
 
   HAL_Init();
-
   SystemClock_Config();
+  SysTick_Init();
+
   // enable clock on GPIOC
-   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOCEN);
 
-   // Make pin0 output mode
+  	 LCD_init();
+  	write('H');
+  	delay_us(200);
+  	write('E');
+  	delay_us(200);
+  	write('L');
+  	delay_us(200);
+  	write('L');
+  	delay_us(200);
+  	write('O');
+  	delay_us(200);
+  	write('W');
+  	  	delay_us(5000);
+  	  	write('O');
+  	  	delay_us(5000);
+  	  	write('R');
+  	  	delay_us(5000);
+  	  	write('L');
+  	  	delay_us(5000);
+  	  	write('D');
+//   lcd_put_cur(0, 0);
+//   lcd_send_string("HELLO ");
+//   lcd_send_string("WORLD ");
+//   lcd_send_string("FROM");
+//   HAL_Delay(1000);
+//   lcd_put_cur(1, 0);
+//   lcd_send_string("CONTROLLERSTECH");
+//   HAL_Delay(2000);
+//   lcd_clear();
 
-   // pointing to a structure
-   // GPIOC->MODER is equivalent to GPIOC.MODER in Python
-
-   //&= is a bit mask operator, a &= B, a = a & b equivalent
-   // GPIOC->MODER = GPIOC->MODER & ~(GPIO_MODER_MODE0)
-   GPIOA->MODER &= ~(GPIO_MODER_MODE0);
-   GPIOA->MODER |= (GPIO_MODER_MODE0_0);
-
-   // Make pin1 output mode
-   GPIOA->MODER &= ~(GPIO_MODER_MODE1);
-   GPIOA->MODER |= (GPIO_MODER_MODE1_0);
-
-   // Make pin2 output mode
-   GPIOA->MODER &= ~(GPIO_MODER_MODE2);
-   GPIOA->MODER |= (GPIO_MODER_MODE2_0);
-
-   // Make pin3 output mode
-   GPIOA->MODER &= ~(GPIO_MODER_MODE3);
-   GPIOA->MODER |= (GPIO_MODER_MODE3_0);
-
-   uint8_t count = 0;       // initialize count
-   uint32_t delay = 100000; // add software delay
    while (1) {
-     if (count == 16) { // if the count goes equals 16, turn it back to 0
-       count = 0;
-     }
 
-     GPIOA->ODR = count; // changes all 16 port bits to count in binary
-
-     for (uint32_t j = 0; j < delay; j++) { // software delay
-       // empty loop
-     }
-     count++; // add count by 1
    }
 
 }

@@ -11,7 +11,7 @@
 #define NUM_OF_COLS 3 // Number of columns in the keypad
 
 // Macro definitions for row and column ports
-#define ROW_PORT GPIOC // Port for rows
+#define ROW_PORT GPIOA // Port for rows
 #define COL_PORT GPIOB // Port for columns
 
 // Macro definitions for row pins
