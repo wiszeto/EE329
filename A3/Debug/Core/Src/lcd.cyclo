@@ -1,5 +1,5 @@
-lcd.c:11:6:LCD_init	1
-lcd.c:35:6:Nybble	1
-lcd.c:43:6:command	5
-lcd.c:73:6:write	5
-lcd.c:106:6:lcd_put_cur	3
+lcd.c:13:6:LCD_init	1
+lcd.c:42:6:Nybble	1
+lcd.c:51:6:command	5
+lcd.c:80:6:write	5
+lcd.c:111:6:lcd_set_cursor_position	2

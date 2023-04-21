@@ -1,5 +1,5 @@
-../Core/Src/lcd.c:11:6:LCD_init	8	static
-../Core/Src/lcd.c:35:6:Nybble	8	static
-../Core/Src/lcd.c:43:6:command	32	static
-../Core/Src/lcd.c:73:6:write	40	static
-../Core/Src/lcd.c:106:6:lcd_put_cur	16	static
+../Core/Src/lcd.c:13:6:LCD_init	8	static
+../Core/Src/lcd.c:42:6:Nybble	8	static
+../Core/Src/lcd.c:51:6:command	32	static
+../Core/Src/lcd.c:80:6:write	32	static
+../Core/Src/lcd.c:111:6:lcd_set_cursor_position	24	static

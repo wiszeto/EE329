@@ -4,45 +4,29 @@
 #include "lcd.h"
 #include <stdint.h>
 void SystemClock_Config(void);
+void str_write(const char *str, uint32_t delay);
 
 int main(void)
 {
-
   HAL_Init();
   SystemClock_Config();
   SysTick_Init();
+  LCD_init();
 
-  // enable clock on GPIOC
 
-  	 LCD_init();
-  	write('H');
-  	delay_us(200);
-  	write('E');
-  	delay_us(200);
-  	write('L');
-  	delay_us(200);
-  	write('L');
-  	delay_us(200);
-  	write('O');
-  	delay_us(200);
-  	write('W');
-  	  	delay_us(5000);
-  	  	write('O');
-  	  	delay_us(5000);
-  	  	write('R');
-  	  	delay_us(5000);
-  	  	write('L');
-  	  	delay_us(5000);
-  	  	write('D');
-//   lcd_put_cur(0, 0);
-//   lcd_send_string("HELLO ");
-//   lcd_send_string("WORLD ");
-//   lcd_send_string("FROM");
-//   HAL_Delay(1000);
-//   lcd_put_cur(1, 0);
-//   lcd_send_string("CONTROLLERSTECH");
-//   HAL_Delay(2000);
-//   lcd_clear();
+  delay_us(100);
+  const char str[] = "EE 329 A3 TIMER ";
+    str_write(str, 100);
+    delay_us(100);
+    //command(0xC2);
+    //command(0xC2);
+    delay_us(100);
+
+  write('Y');
+  delay_us(100);
+  write('T');
+  //const char str2[]= "*****";
+  //str_write(str2, 100);
 
    while (1) {
 
@@ -50,6 +34,12 @@ int main(void)
 
 }
 
+void str_write(const char *str, uint32_t delay) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        write(str[i]);
+        delay_us(delay);
+    }
+}
 
 void SystemClock_Config(void)
 {

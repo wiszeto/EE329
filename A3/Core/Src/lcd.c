@@ -6,7 +6,9 @@ void LCD_init(void);
 void Nybble();
 void command(uint8_t command);
 void write(char letter);
-void lcd_put_cur(uint16_t row, uint16_t col);
+void lcd_set_cursor_position(uint8_t row, uint8_t col);
+
+uint16_t GPIO_Pin[] = {D4, D5, D6, D7};
 
 void LCD_init(void)
 {
@@ -21,28 +23,34 @@ control_pins->OSPEEDR |= ((3 << GPIO_OSPEEDR_OSPEED1_Pos) | (3 << GPIO_OSPEEDR_O
 control_pins->BRR = ( D4 | D5 | D6 | D7 | EN | RW | RS ); //Initializes data to all 0
 
 delay_us( 100000 ); // power-up wait 40 ms
+
 command(0x30);
-delay_us( 200 ); // power-up wait 8 ms
+delay_us( 100 ); // power-up wait .04 ms
 command(0x30);
-delay_us( 200 ); // power-up wait 8 ms
+delay_us( 100 ); // power-up wait .04 ms
 command(0x30);
-delay_us( 200 ); // power-up wait 8 ms
+delay_us( 100 ); // power-up wait .04 ms
 command(0x20);
-
-
+delay_us( 100 ); // power-up wait .04 ms
+command(0x02);
+delay_us( 100 ); // power-up wait .04 ms
+//command(0x28); //Function set: 4-bit/2-line
+//command(0x0F); //Display ON; Blinking cursor
+//command(0x06); //Entry Mode set
 }
 
 void Nybble()
 {
 control_pins->BSRR = EN;
-delay_us( 2500 ); // wait 1 ms
+delay_us( 50 ); // wait
 control_pins->BRR = EN;
-delay_us( 2500 ); // wait 1 ms
+delay_us( 50 ); // wait
+control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 }
 
 void command(uint8_t command)
 {
-	uint16_t GPIO_Pin[] = {D4, D5, D6, D7};
+	uint8_t command2 = command >> 4;
 	control_pins->BRR = (RS | RW); // set RS and RW to zero
 
 	for (int i = 0; i < 4; i++) {
@@ -53,19 +61,18 @@ void command(uint8_t command)
 	    }
 	}
 
-	delay_us( 500000 );
+	delay_us( 1000 );
 	Nybble(); //Send pulse
-	control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 
 	command = command >> 4;
 	for (int i = 0; i < 4; i++) {
-		    if ((command >> i) & 0x01) {
+		    if ((command2 >> i) & 0x01) {
 		    	control_pins->BSRR = GPIO_Pin[i];
 		    } else {
 		    	control_pins->BRR = GPIO_Pin[i];
 		    }
 		}
-	delay_us( 500000 );
+	delay_us( 1000 );
 	Nybble(); //Send pulse
 	control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 }
@@ -74,7 +81,6 @@ void write(char letter)
 {
 	uint8_t c = letter;
 	uint8_t c2 = c >> 4;
-	uint16_t GPIO_Pin[] = {D4, D5, D6, D7};
 	for (int i = 0; i < 4; i++) {
 		    if ((c2 >> i) & 0x01) {
 		    	control_pins->BSRR = GPIO_Pin[i];
@@ -85,9 +91,8 @@ void write(char letter)
 
 	control_pins->BSRR = (RS); // set RS and RW to zero
 	control_pins->BRR = (RW); // set RS and RW to zero
-	delay_us( 500000 );
+	delay_us( 1000 );
 	Nybble();
-	control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 	//c = c >> 4;
 
 	for (int i = 0; i < 4; i++) {
@@ -97,22 +102,22 @@ void write(char letter)
 			    	control_pins->BRR = GPIO_Pin[i];
 			    }
 			}
-	delay_us( 500000 );
+	delay_us( 1000 );
 	Nybble();
 	control_pins->BRR = (RS); // set RS and RW to zero
 	control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 }
 
-void lcd_put_cur(uint16_t row, uint16_t col)
-{
-    switch (row)
-    {
-        case 0:
-            col |= 0x80;
-            break;
-        case 1:
-            col |= 0xC0;
-            break;
+void lcd_set_cursor_position(uint8_t row, uint8_t col) {
+    uint8_t address;
+
+    // Calculate the address based on row and col values
+    if (row == 0) {
+        address = 0x80 + col; // For row 0, the address starts from 0x80
+    } else {
+        address = 0xC0 + col; // For row 1, the address starts from 0xC0
     }
-    command(col);
+
+    // Send the command to set the cursor position
+    command(address);
 }
