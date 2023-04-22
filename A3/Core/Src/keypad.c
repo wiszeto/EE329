@@ -29,7 +29,7 @@
 static const int keys[4][3] = {{1, 2, 3}, 
                                {4, 5, 6},
                                {7, 8, 9},
-                               {0xE, 0, 0xF}};
+                               {10, 0, 11}};
 
 static    int cols[3] = {Col1, Col2, Col3}; //corresponds to GPIO pins
 static    int rows[4] = {Row1, Row2, Row3, Row4}; //coressponds to GPIO pins
@@ -39,8 +39,8 @@ static    int delay_time = 10000;
 void keypad_init() {
 
     //Making column pins output mode bits(01)
-    COL_PORT->MODER &= ~(GPIO_MODER_MODE13 | GPIO_MODER_MODE14 | GPIO_MODER_MODE15);
-    COL_PORT->MODER |= (GPIO_MODER_MODE13_0 | GPIO_MODER_MODE14_0 | GPIO_MODER_MODE15_0);
+    COL_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 | GPIO_MODER_MODE12);
+    COL_PORT->MODER |= (GPIO_MODER_MODE0_0 | GPIO_MODER_MODE1_0 | GPIO_MODER_MODE12_0);
 
     //Making row pins input mode bits(00)
     ROW_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 | GPIO_MODER_MODE2 | GPIO_MODER_MODE3);

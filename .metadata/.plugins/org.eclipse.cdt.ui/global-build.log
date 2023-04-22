@@ -1,167 +1,23 @@
-16:55:38 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd.d" -MT"Core/Src/lcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd.o"
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
-arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
-   text	   data	    bss	    dec	    hex	filename
-   6044	     28	   1572	   7644	   1ddc	A3.elf
-Finished building: default.size.stdout
- 
-Finished building: A3.list
- 
-16:55:42 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-size   A3.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6044	     28	   1572	   7644	   1ddc	A3.elf
-Finished building: default.size.stdout
- 
-16:56:10 **** Incremental Build of configuration Debug for project A3 ****
+20:39:55 **** Incremental Build of configuration Debug for project A3 ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:14:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   14 |   LCD_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:21:5: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   21 |     command(0xC2);
-      |     ^~~~~~~
-../Core/Src/main.c:24:3: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   24 |   write('Y');
-      |   ^~~~~
+../Core/Src/main.c:32:2: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
+   32 |  LCD_init();
+      |  ^~~~~~~~
+../Core/Src/main.c:38:2: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
+   38 |  lcd_set_cursor_position(1, 0);
+      |  ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:42:2: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
+   42 |  command(0x0D);  //turns blinking cursor on to indicate ready for input
+      |  ^~~~~~~
 arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: A3.elf
  
 arm-none-eabi-size   A3.elf 
 arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
    text	   data	    bss	    dec	    hex	filename
-   6052	     28	   1572	   7652	   1de4	A3.elf
-Finished building: default.size.stdout
- 
-Finished building: A3.list
- 
-16:56:32 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:14:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   14 |   LCD_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:21:5: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   21 |     command(0xC1);
-      |     ^~~~~~~
-../Core/Src/main.c:24:3: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   24 |   write('Y');
-      |   ^~~~~
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
-arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
-   text	   data	    bss	    dec	    hex	filename
-   6052	     28	   1572	   7652	   1de4	A3.elf
-Finished building: default.size.stdout
- 
-Finished building: A3.list
- 
-17:02:03 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:14:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   14 |   LCD_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:21:5: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   21 |     command(0xC1);
-      |     ^~~~~~~
-../Core/Src/main.c:24:3: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   24 |   write('F');
-      |   ^~~~~
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
-arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
-   text	   data	    bss	    dec	    hex	filename
-   6064	     28	   1572	   7664	   1df0	A3.elf
-Finished building: default.size.stdout
- 
-Finished building: A3.list
- 
-17:04:36 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:14:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   14 |   LCD_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:21:5: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   21 |     command(0xC0);
-      |     ^~~~~~~
-../Core/Src/main.c: In function 'str_write':
-../Core/Src/main.c:37:9: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   37 |         write(str[i]);
-      |         ^~~~~
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
-arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
-   text	   data	    bss	    dec	    hex	filename
-   6072	     28	   1572	   7672	   1df8	A3.elf
-Finished building: default.size.stdout
- 
-Finished building: A3.list
- 
-17:06:34 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:14:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   14 |   LCD_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:21:5: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
-   21 |     lcd_set_cursor_position(1, 0);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~
-../Core/Src/main.c: In function 'str_write':
-../Core/Src/main.c:36:9: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   36 |         write(str[i]);
-      |         ^~~~~
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
-arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
-   text	   data	    bss	    dec	    hex	filename
-   6128	     28	   1572	   7728	   1e30	A3.elf
-Finished building: default.size.stdout
- 
-Finished building: A3.list
- 
-17:22:15 **** Incremental Build of configuration Debug for project A3 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:14:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   14 |   LCD_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:22:5: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   22 |     command(0xC2);
-      |     ^~~~~~~
-../Core/Src/main.c: In function 'str_write':
-../Core/Src/main.c:36:9: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   36 |         write(str[i]);
-      |         ^~~~~
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
-arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
-   text	   data	    bss	    dec	    hex	filename
-   6072	     28	   1572	   7672	   1df8	A3.elf
+   7324	     60	   1580	   8964	   2304	A3.elf
 Finished building: default.size.stdout
  
 Finished building: A3.list

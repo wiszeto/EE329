@@ -1,0 +1,339 @@
+///*
+// * LCD.c
+// *
+// *  Created on: Apr 17, 2023
+// *      Author: savella
+// */
+//
+//#include <stdint.h>		//for string stuff
+//#include <string.h>		//for string stuff
+//#include "main.h"
+//#include "LCD.h"
+//
+//void SystemClock_Config( void );
+//
+//
+//
+//
+////JAMES NEW FUCKING SHITTY ASS VARIABLES FOR SHITTTTTTTTT
+//char up_min;		//Donna's shitty array shit start
+//char lo_min;
+//char up_sec;
+//char lo_sec;		//Donna's shitt arry shit stop shit
+//
+////To load ASCII number to timer
+//char time_asc[4];  	//time_asc[3] = up_min
+//					//time_asc[2] = lo_min
+//					//time_asc[1] = up_sec
+//					//time_asc[0] = lo_sec
+//					//reference MM:SS = [0][0]:[0][0] = [up_min][lo_min]:[up_sec][lo_sec]
+//
+//
+//
+//
+//
+////FLAGS TO KNOW WHEN TO KNOW
+//int set;		//0 	Don't Accept keypress input
+//					//1		Accept keypress input
+//
+//int go_en; 		//0		Don't accept go input
+//					//1		Accept go input
+//
+//int go;			//0		Don't decrement (set to 0 for reset)
+//					//1 	Decrement
+//
+//
+////From Lab Manual
+//void SysTick_Init( void ) {
+//	SysTick->CTRL |= (SysTick_CTRL_ENABLE_Msk |     	// enable SysTick Timer
+//                      SysTick_CTRL_CLKSOURCE_Msk); 	// select CPU clock
+//	SysTick->CTRL &= ~(SysTick_CTRL_TICKINT_Msk);  	// disable interrupt
+//}
+//
+////From Lab Manual
+//// delay in microseconds using SysTick timer to count CPU clock cycles
+//// do not call with 0 : error, maximum delay.
+//// careful calling with small nums : results in longer delays than specified:
+////	   e.g. @4MHz, delay_us(1) = 10=15 us delay.
+//void delay_us(const uint32_t time_us) {
+//	// set the counts for the specified delay
+//	SysTick->LOAD = (uint32_t)((time_us * (SystemCoreClock / 1000000)) - 1);
+//	SysTick->VAL = 0;                                  	 // clear timer count
+//	SysTick->CTRL &= ~(SysTick_CTRL_COUNTFLAG_Msk);    	 // clear count flag
+//	while (!(SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk)); // wait for flag
+//}
+//
+////void LCD_outputConfig(){   		 //configuring output bits PB0, PB1, PB2, PB3, PB4, PB5, PB6, PB8, PB9, PB10, PB11  --> columns
+////	RCC->AHB2ENR   |=  (RCC_AHB2ENR_GPIOBEN);
+////	LCD_PORT->MODER   &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1| GPIO_MODER_MODE2| GPIO_MODER_MODE3| GPIO_MODER_MODE9| GPIO_MODER_MODE10| GPIO_MODER_MODE11);//sets each mode to 0
+////	LCD_PORT->MODER   |=  (GPIO_MODER_MODE0_0 | GPIO_MODER_MODE1_0 | GPIO_MODER_MODE2_0 | GPIO_MODER_MODE3_0|GPIO_MODER_MODE9_0| GPIO_MODER_MODE10_0| GPIO_MODER_MODE11_0);
+////
+////
+////	LCD_PORT->OTYPER  &= ~(GPIO_OTYPER_OT0 | GPIO_OTYPER_OT1 | GPIO_OTYPER_OT2 | GPIO_OTYPER_OT3| GPIO_OTYPER_OT9| GPIO_OTYPER_OT10| GPIO_OTYPER_OT11);
+////	LCD_PORT->PUPDR   &= ~(GPIO_PUPDR_PUPD0 | GPIO_PUPDR_PUPD1 | GPIO_PUPDR_PUPD2 | GPIO_PUPDR_PUPD3 | GPIO_PUPDR_PUPD9| GPIO_PUPDR_PUPD10| GPIO_PUPDR_PUPD11);
+////	LCD_PORT->OSPEEDR |=  ((3 << GPIO_OSPEEDR_OSPEED0_Pos)|
+////					 (3 << GPIO_OSPEEDR_OSPEED1_Pos)|
+////					 (3 << GPIO_OSPEEDR_OSPEED2_Pos)|
+////					 (3 << GPIO_OSPEEDR_OSPEED3_Pos)|
+////					 (3 << GPIO_OSPEEDR_OSPEED9_Pos)|
+////					 (3 << GPIO_OSPEEDR_OSPEED10_Pos)|
+////					 (3 << GPIO_OSPEEDR_OSPEED11_Pos));
+////
+////	LCD_PORT->BRR = ( DB4 | DB5 | DB6 | DB7 | LCD_EN | LCD_RW | LCD_RS ); //Initializes data to all 0
+////}
+//
+//
+//
+//
+////KELVIN DEBUG SHIT DOWN
+//void LCD_outputConfig(){   		 //configuring output bits PB0, PB1, PB2, PB3, PB4, PB5, PB6, PB8, PB9, PB10, PB11  --> columns
+//	  		RCC->AHB2ENR   |=  (RCC_AHB2ENR_GPIOAEN);
+//	  		LCD_PORT->MODER   &= ~(GPIO_MODER_MODE1 | GPIO_MODER_MODE2| GPIO_MODER_MODE3| GPIO_MODER_MODE4| GPIO_MODER_MODE5| GPIO_MODER_MODE6| GPIO_MODER_MODE7);//sets each mode to 0
+//	  		LCD_PORT->MODER   |=  (GPIO_MODER_MODE0_1 | GPIO_MODER_MODE2_0 | GPIO_MODER_MODE3_0 | GPIO_MODER_MODE4_0|GPIO_MODER_MODE5_0| GPIO_MODER_MODE6_0| GPIO_MODER_MODE7_0);
+//	  		LCD_PORT->OTYPER  &= ~(GPIO_OTYPER_OT1 | GPIO_OTYPER_OT2 | GPIO_OTYPER_OT3 | GPIO_OTYPER_OT4| GPIO_OTYPER_OT5| GPIO_OTYPER_OT6| GPIO_OTYPER_OT7);
+//
+//	  		//Possible
+//	  		LCD_PORT->PUPDR   &= ~(GPIO_PUPDR_PUPD1 | GPIO_PUPDR_PUPD2 | GPIO_PUPDR_PUPD3 | GPIO_PUPDR_PUPD4 | GPIO_PUPDR_PUPD5| GPIO_PUPDR_PUPD6| GPIO_PUPDR_PUPD7);
+//	  		LCD_PORT->OSPEEDR |=  ((3 << GPIO_OSPEEDR_OSPEED1_Pos)|
+//	  		                     (3 << GPIO_OSPEEDR_OSPEED2_Pos)|
+//	  		                     (3 << GPIO_OSPEEDR_OSPEED3_Pos)|
+//	  		                     (3 << GPIO_OSPEEDR_OSPEED4_Pos)|
+//	  		                     (3 << GPIO_OSPEEDR_OSPEED5_Pos)|
+//	  		                     (3 << GPIO_OSPEEDR_OSPEED6_Pos)|
+//	  		                     (3 << GPIO_OSPEEDR_OSPEED7_Pos));
+//	  		LCD_PORT->BRR = ( DB4 | DB5 | DB6 | DB7 | LCD_EN | LCD_RW | LCD_RS ); //Initializes data to all 0
+//
+//}
+////KELVIN DEBUG SHIT UP TOP
+//
+//
+//
+////From Lab Manual (Altered)
+//void LCD_init( void )  {   // RCC & GPIO config removed - leverage A1, A2 code
+//	delay_us( 100000000 );                     // power-up wait 40 ms
+//	for ( int idx = 0; idx < 3; idx++ ) {  // wake up 1,2,3: DATA = 0011 XXXX
+//		LCD_command(0x30);             // HI 4b of 8b cmd, low nibble = X //was changed from 0x30 to 0x03
+//		delay_us( 200 );
+//	}
+//	//sequence from data sheet
+//	LCD_command(0x28);
+//	LCD_command(0x10);
+//	LCD_command(0x0F);
+//	LCD_command(0x06);
+//	LCD_command(0x02);
+//}
+//
+//
+//
+//////KELVIN DEBUG SHIT BELOW-----------------------------------------------------------------------
+////void LCD_init( void )  {   // RCC & GPIO config removed - leverage A1, A2 code
+////
+////    LCD_PORT->BRR = 0xFF;
+////    delay_us(40000);                    // power-up wait 40 ms
+////    LCD_PORT->BSRR = 0x30;            // HI 4b of 8b cmd, low nibble = X
+////    delay_us(5000);
+////    LCD_pulse_ENA();
+////    delay_us(2000);                     //must wait 160us, busy flag not available
+////    LCD_pulse_ENA();						//command 0x30 = Wake up #2
+////    delay_us(2000);                     //must wait 160us, busy flag not available
+////    LCD_pulse_ENA();                            //command 0x30 = Wake up #3
+////    delay_us(2000);                     //can check busy flag now instead of delay
+////    LCD_PORT->BSRR = 0x20;
+////    LCD_pulse_ENA();
+////
+////    LCD_command(0x28);
+////    LCD_command(0x10);
+////    LCD_command(0x0F);
+////    LCD_command(0x06);
+////    LCD_command(0x02);
+////}
+//////KELVIN DEBUG SHIT STOP---------------------------------------------------------------------------------
+//
+//
+//
+////From Lab Manual
+//void LCD_pulse_ENA( void )  {	//pulses ENABLE signal to write data
+//	LCD_PORT->BSRR  = LCD_EN;         	// ENABLE = HI
+//	delay_us( 5 );                         // TDDR > 320 ns
+//	LCD_PORT->BRR   = LCD_EN ;        // ENABLE = LOW
+//	delay_us( 5 );
+//}
+//
+//
+//
+//////From Lab Manual (altered)
+////void LCD_command( uint8_t command )  { // send command to LCD in 4-bit instruction mode
+////	// HIGH nibble then LOW nibble, timing sensitive
+////	LCD_PORT->ODR   &= ~( (DB4 | DB5 | DB6 | DB7) );               	// Clears registers
+////	LCD_PORT->ODR   |= ( (0xF0 & command) >> 4); 					// sets HIGH nibble to register
+////	delay_us( 50 );
+////	LCD_pulse_ENA( );                                    			//latch HIGH NIBBLE
+////
+////	LCD_PORT->ODR   &= ~( (DB4 | DB5 | DB6 | DB7) );               	// clear
+////	//Added mask to ensure isolated lower nibble. Redundant?
+////	LCD_PORT->ODR   |= (0x0F & command);							// sets LOW nibble to register
+////	delay_us(  50 );
+////	LCD_pulse_ENA( );                                    			// latch LOW NIBBLE
+////	LCD_PORT->ODR   &= ~( (DB4 | DB5 | DB6 | DB7) );               	// clear; redundant but to lock it
+////}
+//
+//
+//
+//////KELVIN DEBUG SHIT START
+//void LCD_command( uint8_t command )  { // send command to LCD in 4-bit instruction mode
+//	LCD_PORT->BRR   = ( LCD_DATA_BITS );               // isolate cmd bits
+//	LCD_PORT->BRR   = (LCD_RS);
+//	LCD_PORT->ODR   |= ( command & LCD_DATA_BITS ); // HIGH shifted low
+//	delay_us( 5 );
+//	LCD_pulse_ENA( );                                    // latch HIGH NIBBLE
+//
+//	LCD_PORT->BRR   = ( LCD_DATA_BITS );               // isolate cmd bits
+//	LCD_PORT->ODR   |= ( (command<<4) & LCD_DATA_BITS );      // LOW nibble
+//	delay_us( 5 );
+//	LCD_pulse_ENA( );                                   			// latch LOW NIBBLE
+//}
+////KELVIN DEBUG SHIT END
+//
+//
+////From Lab Manual
+//void LCD_write_char( uint8_t letter )  {
+//	// calls LCD_command() w/char data; assumes all ctrl bits set LO in LCD_init()
+//	LCD_PORT->ODR   |= (LCD_RS);       // RS = HI for data to address
+//	delay_us( 5 );
+//	LCD_command( letter );             // character to print
+//	LCD_PORT->ODR   &= ~(LCD_RS);      // RS = LO
+//}
+//
+//
+//
+////NEW FUNCTIONS
+//
+////TEST
+////To set cursor
+//void LCD_set_cursor( uint8_t col, uint8_t row ){
+//	uint8_t row_address; 				//row address initialize variable
+//	uint8_t address = 0x80 + col;		//To load address to set DDRAM instruction
+//
+//	switch(row){
+//	case 0:		//lower row range 00 to 0F
+//		row_address = 0x00;
+//		address = row_address + address;
+//		break;
+//
+//	case 1:		//upper row range 40 to 4F
+//		row_address = 0x40;
+//		address = row_address + address;
+//		break;
+//	}
+//	LCD_command(address);	//sends address to be set to LCD
+//}
+//
+////TEST
+////From ChatGPT "How to index through a string to access each element"
+////write string to LCD
+//void LCD_write_string( char *str ) {
+//	for (int i = 0; i < strlen(str); i++){
+//		LCD_write_char((uint8_t) str[i]);
+//	}
+//}
+//
+//
+////FOR COUNTER
+////TEST
+////Resets counter display to 00:00
+//void LCD_reset_count_display(){
+//	LCD_set_cursor(11,1);		//set cursor at MM:SS
+//	LCD_write_string("     ");	//clears with 5 spaces
+//	LCD_set_cursor(11,1);		//set cursor at MM:SS
+//	LCD_write_string("00:00");
+//	LCD_set_cursor(11,1);		//set cursor at MM:SS
+//	LCD_command(0x0D);			//turns blinking cursor on
+//
+//}
+//
+//
+//
+///*
+// * BELOW DESCRIPTION
+// * translates keypad input to display
+// * checks when to decrement
+// * check_time has important notes
+// * time_in_sec has important notes
+//*/
+//
+////updates LCD with new values
+//void LCD_update_count_display(){
+//	LCD_set_cursor(11,1);		//set cursor at MM:SS
+//	LCD_write_char(time_asc[3]);
+//	LCD_write_char(time_asc[2]);
+//	LCD_write_char(':');
+//	LCD_write_char(time_asc[1]);
+//	LCD_write_char(time_asc[0]);
+//}
+//
+////Converts total time (s) to ASCII equivalent values and loads them onto array for uploading
+////time_in_sec FOR PARAMETER
+//void load_time( int total_seconds ){
+//	uint8_t u_min, l_min, u_sec, l_sec; //initializes values
+//	u_min = total_seconds / 60;			//gets all the minutes
+//	l_min = u_min % 10;					//gets ones minutes
+//	u_min = u_min / 10;					//gets tens minutes
+//
+//	u_sec = total_seconds % 60; 		//gets all the secs
+//	l_sec = u_sec % 10;					//gets ones secs
+//	u_sec = u_sec / 10;					//gets tens sec
+//
+//	//Updates array
+//	time_asc[3] = LCD_convert_time_to_ascii(u_min);
+//	time_asc[2] = LCD_convert_time_to_ascii(l_min);
+//	time_asc[1] = LCD_convert_time_to_ascii(u_sec);
+//	time_asc[0] = LCD_convert_time_to_ascii(l_sec);
+//}
+//
+////Gets total time in seconds
+////LCD_convert_ascii_to_time FOR PARAMETERS
+////LCD_convert_ascii_to_time parameters Donna's shitty array
+////REFERENCE!!!!!!!! LCD.h for above
+//int time_in_sec( int hmin, int lmin, int hsec, int lsec ){
+//	int total_time = 0; 	//to store total time
+//	hmin = hmin*10 + lmin;	//adds total minutes together
+//	hsec = hsec*10 + lmin;	//adds total seconds together
+//	return (total_time =(hmin*60 + hsec)); //returns total time
+//}
+//
+////grabs the ASCII equivalent number and converts it to its binary representation
+//int LCD_convert_ascii_to_time ( uint8_t asctime ){
+//	return (0x0F & asctime);
+//}
+//
+////illiterate af? look at shit i mean eaetrilil f?a kolo at tish
+//char LCD_convert_time_to_ascii (uint8_t timeasc){
+//	return (0x30 + timeasc);
+//}
+//
+//
+///*
+// * NO LONG MISSIN FUNC BELOW
+// */
+//
+//
+////ONLY checks when count is complete
+////								still need to implement if reset is pushed during countdown
+////Sets flags to decide to decrement or not
+////Parameters is total time in seconds
+//void check_time (int time){
+//	if (time == 0){
+//		go = 0;		//Stops decrementing
+//		set = 1;	//Accept keypress input
+//		return;
+//	}
+//	set = 0;		//Don't accept keypress input
+//}
+//
+//int decrement_time (int time){
+//	return time--;
+//}
+//
+//
+//
+//}

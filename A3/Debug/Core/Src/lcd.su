@@ -3,3 +3,11 @@
 ../Core/Src/lcd.c:51:6:command	32	static
 ../Core/Src/lcd.c:80:6:write	32	static
 ../Core/Src/lcd.c:111:6:lcd_set_cursor_position	24	static
+../Core/Src/lcd.c:127:6:str_write	24	static
+../Core/Src/lcd.c:152:6:LCD_reset_count_display	8	static
+../Core/Src/lcd.c:163:6:LCD_update_count_display	8	static
+../Core/Src/lcd.c:174:6:load_time	24	static
+../Core/Src/lcd.c:192:6:LCD_convert_time_to_ascii	16	static
+../Core/Src/lcd.c:198:5:time_in_sec	32	static
+../Core/Src/lcd.c:208:5:LCD_convert_ascii_to_time	16	static
+../Core/Src/lcd.c:212:5:decrement_time	16	static

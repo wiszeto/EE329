@@ -121,3 +121,98 @@ void lcd_set_cursor_position(uint8_t row, uint8_t col) {
     // Send the command to set the cursor position
     command(address);
 }
+
+
+
+void str_write(const char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        write(str[i]);
+        delay_us(100);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+//James Imported Shit
+
+
+char time_asc[4];
+
+
+////FOR COUNTER
+////TEST
+////Resets counter display to 00:00
+void LCD_reset_count_display(){
+	lcd_set_cursor_position(1,11);		//set cursor at MM:SS
+	str_write("     ");	//clears with 5 spaces
+	lcd_set_cursor_position(1,11);		//set cursor at MM:SS
+	str_write("00:00");
+	lcd_set_cursor_position(1,11);		//set cursor at MM:SS
+	command(0x0D);						//turns blinking cursor on
+}
+
+//This is only for countdown
+//Updates LCD with new values
+void LCD_update_count_display(){
+	lcd_set_cursor_position(1,11);		//set cursor at MM:SS
+	write(time_asc[3]);
+	write(time_asc[2]);
+	write(':');
+	write(time_asc[1]);
+	write(time_asc[0]);
+}
+
+//Converts total time (s) to ASCII equivalent values and loads them onto array for uploading
+//time_in_sec FOR PARAMETER
+void load_time( int total_seconds ){
+	uint8_t u_min, l_min, u_sec, l_sec; //initializes values
+	u_min = total_seconds / 60;			//gets all the minutes
+	l_min = u_min % 10;					//gets ones minutes
+	u_min = u_min / 10;					//gets tens minutes
+
+	u_sec = total_seconds % 60; 		//gets all the secs
+	l_sec = u_sec % 10;					//gets ones secs
+	u_sec = u_sec / 10;					//gets tens sec
+
+	//Updates array
+	time_asc[3] = LCD_convert_time_to_ascii(u_min);
+	time_asc[2] = LCD_convert_time_to_ascii(l_min);
+	time_asc[1] = LCD_convert_time_to_ascii(u_sec);
+	time_asc[0] = LCD_convert_time_to_ascii(l_sec);
+}
+
+//Fow Wilson's code: Use this to convert integer keypress value into
+char LCD_convert_time_to_ascii (uint8_t timeasc){
+	return (0x30 + timeasc);
+}
+
+
+//LCD_convert_ascii_to_time FOR PARAMETERS
+int time_in_sec( int hmin, int lmin, int hsec, int lsec ){
+	int total_time = 0; 	//to store total time
+	hmin = hmin*10 + lmin;	//adds total minutes together
+	hsec = hsec*10 + lsec;	//adds total seconds together
+	total_time = (hmin*60 + hsec);
+	return total_time; //returns total time
+}
+
+
+
+int LCD_convert_ascii_to_time ( uint8_t asctime ){
+	return (0x0F & asctime);
+}
+
+int decrement_time (int time){
+	delay_us(2000000); //delay 1 sec
+	return (--time);
+}
+
+
+
