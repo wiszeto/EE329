@@ -18,12 +18,14 @@ int main(void)
   const char str[] = "EE 329 A3 TIMER ";
     str_write(str, 100);
     delay_us(100);
-    //lcd_set_cursor_position(1, 0);
-    command(0xC2);
+    command(0xC1);
+    //command(0xC2);
     delay_us(100);
-    const char str2[] = "*=SET #=GO ";
-    str_write(str2, 100);
-
+  write('Y');
+  delay_us(100);
+  write('T');
+  //const char str2[]= "*****";
+  //str_write(str2, 100);
 
    while (1) {
 

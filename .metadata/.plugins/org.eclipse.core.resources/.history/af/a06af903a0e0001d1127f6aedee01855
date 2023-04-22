@@ -50,32 +50,32 @@ control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 
 void command(uint8_t command)
 {
-    uint8_t command2 = command >> 4;
-    control_pins->BRR = (RS | RW); // set RS and RW to zero
+	uint8_t command2 = command >> 4;
+	control_pins->BRR = (RS | RW); // set RS and RW to zero
 
-    for (int i = 0; i < 4; i++) {
-        if ((command2 >> i) & 0x01) { // Corrected to use command2
-            control_pins->BSRR = GPIO_Pin[i];
-        } else {
-            control_pins->BRR = GPIO_Pin[i];
-        }
-    }
+	for (int i = 0; i < 4; i++) {
+	    if ((command >> i) & 0x01) {
+	    	control_pins->BSRR = GPIO_Pin[i];
+	    } else {
+	    	control_pins->BRR = GPIO_Pin[i];
+	    }
+	}
 
-    delay_us( 1000 );
-    Nybble(); //Send pulse
+	delay_us( 1000 );
+	Nybble(); //Send pulse
 
-    for (int i = 0; i < 4; i++) {
-        if ((command >> i) & 0x01) { // Corrected to use command
-            control_pins->BSRR = GPIO_Pin[i];
-        } else {
-            control_pins->BRR = GPIO_Pin[i];
-        }
-    }
-    delay_us( 1000 );
-    Nybble(); //Send pulse
-    control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
+	command = command >> 4;
+	for (int i = 0; i < 4; i++) {
+		    if ((command2 >> i) & 0x01) {
+		    	control_pins->BSRR = GPIO_Pin[i];
+		    } else {
+		    	control_pins->BRR = GPIO_Pin[i];
+		    }
+		}
+	delay_us( 1000 );
+	Nybble(); //Send pulse
+	control_pins->ODR &= ~( (D4 | D5 | D6 | D7) ); // Clears registers
 }
-
 
 void write(char letter)
 {
