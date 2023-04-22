@@ -126,11 +126,9 @@ int main(void) {
 			go = 0;			//no longer takes go input to start countdown (this could potentially break sequencing might have to put it in the while start countdown at the very end)
 			//-----------------START TO COUNTDOWN
 			while ((total_time_sec != 0) & (reset == 0)) {
-				char output = keypad_read(4, 3); 	// get key value
-				if (output == '*')	{				//if reset is pushed
-					reset = 1;
-					load_time(0);
-				}
+				char output = keypad_read(4, 3); // get key value
+				if (output == '*')	reset = 1;//if reset is pushed
+				load_time(0);
 
 				else {
 					total_time_sec = decrement_time(total_time_sec);

@@ -210,7 +210,7 @@ int LCD_convert_ascii_to_time ( uint8_t asctime ){
 }
 
 int decrement_time (int time){
-	delay_us(1000000); //delay 1 sec
+	delay_us(200000); //delay 1 sec
 	return (--time);
 }
 
