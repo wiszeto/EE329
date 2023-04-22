@@ -1,27 +1,10 @@
-20:39:55 **** Incremental Build of configuration Debug for project A3 ****
+13:01:15 **** Incremental Build of configuration Debug for project A3 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:32:2: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   32 |  LCD_init();
-      |  ^~~~~~~~
-../Core/Src/main.c:38:2: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
-   38 |  lcd_set_cursor_position(1, 0);
-      |  ^~~~~~~~~~~~~~~~~~~~~~~
-../Core/Src/main.c:42:2: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   42 |  command(0x0D);  //turns blinking cursor on to indicate ready for input
-      |  ^~~~~~~
-arm-none-eabi-gcc -o "A3.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A3\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: A3.elf
- 
 arm-none-eabi-size   A3.elf 
-arm-none-eabi-objdump -h -S  A3.elf  > "A3.list"
    text	   data	    bss	    dec	    hex	filename
-   7324	     60	   1580	   8964	   2304	A3.elf
+   7724	     60	   1596	   9380	   24a4	A3.elf
 Finished building: default.size.stdout
  
-Finished building: A3.list
- 
 
-20:39:56 Build Finished. 0 errors, 3 warnings. (took 731ms)
+13:01:16 Build Finished. 0 errors, 0 warnings. (took 228ms)
 

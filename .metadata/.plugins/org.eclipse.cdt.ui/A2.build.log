@@ -1,4 +1,4 @@
-08:16:15 **** Incremental Build of configuration Debug for project A2 ****
+09:18:48 **** Incremental Build of configuration Debug for project A2 ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/keypad.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/keypad.d" -MT"Core/Src/keypad.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/keypad.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
@@ -12,11 +12,11 @@ Finished building target: A2.elf
 arm-none-eabi-size   A2.elf 
 arm-none-eabi-objdump -h -S  A2.elf  > "A2.list"
    text	   data	    bss	    dec	    hex	filename
-   5372	     20	   1572	   6964	   1b34	A2.elf
+   5652	     52	   1572	   7276	   1c6c	A2.elf
 Finished building: default.size.stdout
  
 Finished building: A2.list
  
 
-08:16:16 Build Finished. 0 errors, 1 warnings. (took 595ms)
+09:18:48 Build Finished. 0 errors, 1 warnings. (took 855ms)
 

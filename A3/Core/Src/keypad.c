@@ -26,21 +26,21 @@
 #include "keypad.h"
 
 //Allocated values corresponding to button push
-static const int keys[4][3] = {{1, 2, 3}, 
-                               {4, 5, 6},
-                               {7, 8, 9},
-                               {10, 0, 11}};
+static const char keys[4][3] = {{'1', '2', '3'},
+                               {'4', '5', '6'},
+                               {'7', '8', '9'},
+                               {'*', '0', '#'}};
 
 static    int cols[3] = {Col1, Col2, Col3}; //corresponds to GPIO pins
-static    int rows[4] = {Row1, Row2, Row3, Row4}; //coressponds to GPIO pins
+static    int rows[4] = {Row1, Row2, Row3, Row4}; //coresponds to GPIO pins
 static    int delay_time = 10000;
 
 //This function, configures row, column and keypad pin
 void keypad_init() {
 
     //Making column pins output mode bits(01)
-    COL_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 | GPIO_MODER_MODE12);
-    COL_PORT->MODER |= (GPIO_MODER_MODE0_0 | GPIO_MODER_MODE1_0 | GPIO_MODER_MODE12_0);
+    COL_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 | GPIO_MODER_MODE2);
+    COL_PORT->MODER |= (GPIO_MODER_MODE0_0 | GPIO_MODER_MODE1_0 | GPIO_MODER_MODE2_0);
 
     //Making row pins input mode bits(00)
     ROW_PORT->MODER &= ~(GPIO_MODER_MODE0 | GPIO_MODER_MODE1 | GPIO_MODER_MODE2 | GPIO_MODER_MODE3);
@@ -67,7 +67,7 @@ int keypad_read(int cols, int row){
         return check_row_col(NUM_OF_COLS, NUM_OF_ROWS);  
     	}
     }
-    return -1;
+    return '-';
 }
 
 //iterate through each column and check all rows
@@ -80,5 +80,5 @@ int check_row_col(int col, int row){
             }
         }
     }
-    return -1;
+    return '-';
 }
