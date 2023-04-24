@@ -25,6 +25,7 @@
 #define Col2 GPIO_PIN_1 // Column 2 pin
 #define Col3 GPIO_PIN_2 // Column 3 pin
 
+//prototypes
 void keypad_init();
 int keypad_read(int cols, int row);
 int check_row_col(int col, int row);

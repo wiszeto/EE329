@@ -9,17 +9,18 @@
  * date      : 230414
  * compiler  : STM32CubeIDE Version: 1.12.1 (2022)
  * target    : NUCLEO-L4A6ZG
+ * citations : Szeto, Wilson. (2023-Apr-23). "reference code from here". Retrieved from https://github.com/wiszeto/EE329
  ******************************************************************************
  * wiring    :
  * Column Output Pins
- * PB15 - CN7-3 - Column Pin 1 
- * PB13 - CN7-5 - Column Pin 2
- * PB12 - CN7-7 - Column Pin 3
+ * PB0 - CN7-3 - Column Pin 1
+ * PB1 - CN7-5 - Column Pin 2
+ * PB2 - CN7-7 - Column Pin 3
  * Row Input Pins
- * PC0 - CN9-3 - Row Pin 1
- * PC1 - CN9-7 - Row Pin 2
- * PC2 - CN10-9 - Row Pin 3
- * PC3 - CN9-5 - Row Pin 4
+ * PD0 - CN9-3 - Row Pin 1
+ * PD1 - CN9-7 - Row Pin 2
+ * PD2 - CN10-9 - Row Pin 3
+ * PD3 - CN9-5 - Row Pin 4
  ******************************************************************************
  */
 
