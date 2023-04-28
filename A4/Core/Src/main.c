@@ -1,13 +1,11 @@
 
 #include "main.h"
-#include "lcd.h"
 #include "keypad.h"
+#include "lcd.h"
 #include "delay.h"
 
-RNG_HandleTypeDef hrng; //you have to go in to your .ioc and in security, check RNG
 
 void SystemClock_Config(void);
-static void MX_RNG_Init(void);
 
 int main(void)
 {
@@ -16,18 +14,23 @@ int main(void)
 
   HAL_Init();
   SystemClock_Config();
-  MX_RNG_Init();
   SysTick_Init();
   LCD_init();
-  keypad_init();
+
 
 
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;	//GPIOC clock init
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;	//GPIOB clock init
   RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;	//RNG clock init
+  RCC->CRRCR |= (RCC_CRRCR_HSI48ON);
 
   GPIOB->MODER &= ~(GPIO_MODER_MODE7);	//LD2 clear
   GPIOB->MODER |= (GPIO_MODER_MODE7_0); //LD2 output mode
+
+  GPIOC->MODER   &= ~(GPIO_MODER_MODE13);
+  GPIOC->PUPDR   &= ~(GPIO_PUPDR_PUPD13_1);
+  GPIOC->PUPDR   |= (GPIO_PUPDR_PUPD13_1);
+
 
   GPIOC->MODER &= ~(GPIO_MODER_MODE0);
   GPIOC->MODER |= (GPIO_MODER_MODE0_0);
@@ -40,6 +43,8 @@ int main(void)
 
   RNG->CR |= (RNG_CR_RNGEN | RNG_CR_IE); //RNG turn on interrupt mode
 
+
+
   delay_us(100);
     str_write("EE 329 A4 REACT "); // write EE 329 A3 TIMER to first line
     delay_us(100);
@@ -49,27 +54,21 @@ int main(void)
   while (1)
   {
 
-	  while (reset_state) {
-	        char star_check = keypad_read(4, 3); // checks if asterisk is pushed to get out of reset state
-	        if (star_check == '*') { // Checks if button is pushed
-	          reset_state = 0; // takes me out of reset state allows me to take inputs
-	          lcd_set_cursor_position(1, 11); // set cursor to hmin
-	          delay_us(1000000);              // delay for next press
-	        }
-	      }
 
-
-		while (!(RNG->SR & RNG_SR_DRDY));
-		random_number = RNG->DR;
-		if (random_number > 0 ){
+		if ((GPIOC->IDR & GPIO_IDR_ID13) == 0) {
+			GPIOB->BRR = GPIO_PIN_7;
+		} else {
 			GPIOB->BSRR = GPIO_PIN_7;
-			GPIOC->ODR = random_number;
-			delay_us(10000);
 		}
-  }
+
+//	  while (!(RNG->SR & RNG_SR_DRDY));
+//	  		random_number = RNG->DR;
+//	  		if (random_number > 0 ){
+//	  			delay_us(10000);
+//	  		}
 
 }
-
+}
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -80,7 +79,9 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
@@ -90,7 +91,8 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
@@ -104,32 +106,40 @@ void SystemClock_Config(void)
   }
 }
 
+/* USER CODE BEGIN 4 */
 
-static void MX_RNG_Init(void)
-{
+/* USER CODE END 4 */
 
-  hrng.Instance = RNG;
-  if (HAL_RNG_Init(&hrng) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-}
-
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
-
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
   {
   }
-
+  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
-
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
 }
-#endif
+#endif /* USE_FULL_ASSERT */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
