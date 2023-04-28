@@ -84,7 +84,7 @@ int main(void)
 	  				GPIOB->BRR = GPIO_PIN_7;
 	  		  		lcd_set_cursor_position(1, 0); // set cursor to second row, first column
 	  		  		str_write("TIME = ");
-	  		  		elapsed_time = elapsed_time / 2000;
+	  		  		elapsed_time = elapsed_time / 1000;
 
 	  		  	if (elapsed_time < 1000) {
 	  		  	    char str[4]; // maximum number of digits for a 10-bit number is 4 (including the decimal point)
