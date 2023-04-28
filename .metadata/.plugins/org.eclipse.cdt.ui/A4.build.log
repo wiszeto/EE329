@@ -1,24 +1,33 @@
-01:03:57 **** Incremental Build of configuration Debug for project A4 ****
+08:20:42 **** Incremental Build of configuration Debug for project A4 ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:21:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   21 |   LCD_init();
+../Core/Src/main.c:23:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
+   23 |   LCD_init();
       |   ^~~~~~~~
-../Core/Src/main.c:46:5: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
-   46 |     lcd_set_cursor_position(1, 0); // set cursor to second row, first column
+../Core/Src/main.c:51:5: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
+   51 |     lcd_set_cursor_position(1, 0); // set cursor to second row, first column
       |     ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:67:6: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
+   67 |      while (!(RNG->SR & RNG_SR_DRDY));
+      |      ^~~~~
+../Core/Src/main.c:68:7: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
+   68 |       random_number = RNG->DR;
+      |       ^~~~~~~~~~~~~
+../Core/Src/main.c:100:13: warning: implicit declaration of function 'itoa' [-Wimplicit-function-declaration]
+  100 |             itoa(milliseconds, str, 10);
+      |             ^~~~
 arm-none-eabi-gcc -o "A4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: A4.elf
  
 arm-none-eabi-size   A4.elf 
 arm-none-eabi-objdump -h -S  A4.elf  > "A4.list"
    text	   data	    bss	    dec	    hex	filename
-   9516	     60	   1588	  11164	   2b9c	A4.elf
+   7140	     28	   1572	   8740	   2224	A4.elf
 Finished building: default.size.stdout
  
 Finished building: A4.list
  
 
-01:03:58 Build Finished. 0 errors, 2 warnings. (took 681ms)
+08:20:43 Build Finished. 0 errors, 4 warnings. (took 670ms)
 
