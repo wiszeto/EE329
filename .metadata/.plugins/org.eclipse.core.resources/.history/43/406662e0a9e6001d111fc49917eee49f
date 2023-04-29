@@ -1,12 +1,12 @@
-//includes
+
 #include "main.h"
 #include "delay.h"
+#include "keypad.h"
 #include "lcd.h"
 
 void SystemClock_Config(void);
 
 int main(void) {
-  //variable declarations
   int random_number;
   int reset_state = 1;
   int react_state = 0;
@@ -15,13 +15,11 @@ int main(void) {
   int end_time = 0;
   int elapsed_time = 0;
 
-  //inits
   HAL_Init();
   SystemClock_Config();
   SysTick_Init();
   LCD_init();
 
-  //clocks
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;  // GPIOC clock init
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;  // GPIOB clock init
   RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;    // RNG clock init
@@ -38,32 +36,34 @@ int main(void) {
   GPIOC->PUPDR &= ~(GPIO_PUPDR_PUPD13_1);
   GPIOC->PUPDR |= (GPIO_PUPDR_PUPD13_1);
 
-  RNG->CR |= (RNG_CR_RNGEN | RNG_CR_IE); // RNG turn on
+  RNG->CR |= (RNG_CR_RNGEN | RNG_CR_IE); // RNG turn on interrupt mode
 
   delay_us(100);
-  str_write("EE 329 A4 REACT ");
+  str_write("EE 329 A4 REACT "); // write EE 329 A3 TIMER to first line
   delay_us(100);
   lcd_set_cursor_position(1, 0); // set cursor to second row, first column
   delay_us(100);
-  str_write("PUSH SW TO TRIG ");
+  str_write("PUSH SW TO TRIG "); // write *=SET #=GO --:-- to second line
   while (1) {
-    if (reset_state) { // Reset state: waiting for the button press to start the reaction timer
+    if (reset_state) {
       GPIOB->BRR = GPIO_PIN_7;
-      if (GPIOC->IDR & GPIO_IDR_ID13) {  // Check if the button is pressed
+      if (GPIOC->IDR & GPIO_IDR_ID13) {
         reset_state = 0;
         react_state = 1;
         delay_us(10000000);
       }
     }
 
-    if (react_state) { // React state: waiting for the user's reaction to a randomly timed LED
-      while (!(RNG->SR & RNG_SR_DRDY)); // Generate a random number using the hardware random number generator
+    if (react_state) {
+
+      while (!(RNG->SR & RNG_SR_DRDY))
+        ;
       random_number = RNG->DR;
-      delay_us(random_number & 0xFF);  // Wait for a random amount of time
+      delay_us(random_number & 0xFF);
       start_time = TIM2->CNT;
       GPIOB->BSRR = GPIO_PIN_7;
       while (1) {
-        if (GPIOC->IDR & GPIO_IDR_ID13) { // Wait for the button press and calculate the elapsed time
+        if (GPIOC->IDR & GPIO_IDR_ID13) {
           end_time = TIM2->CNT;
           elapsed_time = end_time - start_time;
           react_state = 0;
@@ -73,14 +73,15 @@ int main(void) {
       }
     }
 
-    if (display_state) { // Display state: show the elapsed time on the LCD
+    if (display_state) {
       GPIOB->BRR = GPIO_PIN_7;
       lcd_set_cursor_position(1, 0); // set cursor to second row, first column
       str_write("TIME = ");
-      elapsed_time = elapsed_time / 4000;
+      elapsed_time = elapsed_time / 2250;
 
-      if (elapsed_time < 1000) { // Display the elapsed time for less than 1000 ms
-        char str[4];
+      if (elapsed_time < 1000) {
+        char str[4]; // maximum number of digits for a 10-bit number is 4
+                     // (including the decimal point)
         int milliseconds = elapsed_time;
 
         lcd_set_cursor_position(1, 7);
@@ -104,7 +105,8 @@ int main(void) {
         delay_us(100);
         str_write("s");
       } else if (elapsed_time < 10000) { // 10 seconds is 10000ms
-        char str[5];
+        char str[5]; // maximum number of digits for a 10-bit number is 5
+                     // (including the decimal point)
         int seconds = elapsed_time / 1000;
         int milliseconds = elapsed_time % 1000;
 
@@ -147,7 +149,7 @@ int main(void) {
                                   0); // set cursor to second row, first column
           delay_us(100);
           str_write(
-              "PUSH SW TO TRIG ");
+              "PUSH SW TO TRIG "); // write *=SET #=GO --:-- to second line
           delay_us(10000000);
           break;
         }
