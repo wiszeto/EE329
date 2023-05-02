@@ -1,0 +1,51 @@
+#inxlusw "main.h"
+#include "dac.h"
+
+void DAC_init(void){
+  //configure GPIO
+  //set as alternative function mode mode because outputting to the DAC
+  GPIOA-> MODER &= ~(GPIO_MODER_MODE4|
+                     GPIO_MODER_MODE5|
+                     GPIO_MODER_MODE7);
+
+  GPIOA-> MODER |= (GPIO_MODER_MODE4_1|
+                    GPIO_MODER_MODE5_1|
+                    GPIO_MODER_MODE7_1);
+
+  GPIOA->AFR[0] &= ~(GPIO_AFRL_AFSEL4|
+                     GPIO_AFRL_AFSEL5|
+                     GPIO_AFRL_AFSEL7);
+
+  GPIOA->AFR[0] |=(5<<GPIO_AFRL_AFSEL4_Pos|
+                   5<<GPIO_AFRL_AFSEL5_Pos|
+                   5<<GPIO_AFRL_AFSEL7_Pos);
+
+  //configure SPI1
+  SPI1-> CR1 |= SPI_CR1_MSTR;
+  SPI1-> CR2 |= SPI_CR2_SSOE | SPI_CR2_NSSP | (0xF << SPI_CR2_DS_Pos);
+  SPI1-> CR1 |= SPI_CR1_SPE;
+}
+
+void DAC_write(dig_val) {
+    //masking config bits onto digital val
+    uint32_t config_bits = dig_val << 3;
+    uint32_t data = config_bits + dig_val;
+
+    //check if the buffer is empty
+    while(!(SPI1->SR & SPI_SR_TXE)){}
+
+    //writing to the DAC
+    SPI1->DR = dig_val;
+}
+
+uint32_t DAC_volt_conv(uint32_t analog_val){
+
+    //check if vref greater than 3300 mV
+    if(analog_val > Vref){
+        analog_val = Vref;
+    }
+
+    //convert to digital value
+    uint32_t dig_val = (analog_val * 4095) / Vref;
+    return dig_val;
+}

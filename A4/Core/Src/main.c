@@ -1,12 +1,24 @@
-//includes
+/*******************************************************************
+ * Project Name: Reaction Timer
+ * Author: Wilson Szeto - wiszeto@calpoly.edu
+ * Date: April 30, 2023
+ * Description: A program to measure and display the user's reaction
+ *              time using an LED, a button, and an LCD display.
+ * Citations: Kelvin Vilago, EE 329 Sp'23 student. (2023-Apr-26).
+ * 			 Personal Communication: taught me how to use the
+ * 			 RCC->CRRCR |= (RCC_CRRCR_HSI48ON);
+ *******************************************************************/
+
+// includes
 #include "main.h"
 #include "delay.h"
 #include "lcd.h"
+#include <stdint.h>
 
 void SystemClock_Config(void);
 
 int main(void) {
-  //variable declarations
+  // variable declarations
   int random_number;
   int reset_state = 1;
   int react_state = 0;
@@ -15,13 +27,13 @@ int main(void) {
   int end_time = 0;
   int elapsed_time = 0;
 
-  //inits
+  // inits
   HAL_Init();
   SystemClock_Config();
   SysTick_Init();
   LCD_init();
 
-  //clocks
+  // clocks
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;  // GPIOC clock init
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;  // GPIOB clock init
   RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;    // RNG clock init
@@ -47,23 +59,27 @@ int main(void) {
   delay_us(100);
   str_write("PUSH SW TO TRIG ");
   while (1) {
-    if (reset_state) { // Reset state: waiting for the button press to start the reaction timer
+    if (reset_state) { // Reset state: waiting for the button press to start the
+                       // reaction timer
       GPIOB->BRR = GPIO_PIN_7;
-      if (GPIOC->IDR & GPIO_IDR_ID13) {  // Check if the button is pressed
+      if (GPIOC->IDR & GPIO_IDR_ID13) { // Check if the button is pressed
         reset_state = 0;
         react_state = 1;
         delay_us(10000000);
       }
     }
 
-    if (react_state) { // React state: waiting for the user's reaction to a randomly timed LED
-      while (!(RNG->SR & RNG_SR_DRDY)); // Generate a random number using the hardware random number generator
+    if (react_state) { // React state: waiting for the user's reaction to a
+                       // randomly timed LED
+      while (!(RNG->SR & RNG_SR_DRDY))
+        ; // Generate a random number using the hardware random number generator
       random_number = RNG->DR;
-      delay_us(random_number & 0xFF);  // Wait for a random amount of time
+      delay_us(random_number & 0xFF); // Wait for a random amount of time
       start_time = TIM2->CNT;
       GPIOB->BSRR = GPIO_PIN_7;
       while (1) {
-        if (GPIOC->IDR & GPIO_IDR_ID13) { // Wait for the button press and calculate the elapsed time
+        if (GPIOC->IDR & GPIO_IDR_ID13) { // Wait for the button press and
+                                          // calculate the elapsed time
           end_time = TIM2->CNT;
           elapsed_time = end_time - start_time;
           react_state = 0;
@@ -74,15 +90,22 @@ int main(void) {
     }
 
     if (display_state) { // Display state: show the elapsed time on the LCD
+      // Turn off LED
       GPIOB->BRR = GPIO_PIN_7;
-      lcd_set_cursor_position(1, 0); // set cursor to second row, first column
+
+      // Set cursor position and display the "TIME =" message
+      lcd_set_cursor_position(1, 0);
       str_write("TIME = ");
+
+      // Convert elapsed time to milliseconds
       elapsed_time = elapsed_time / 4000;
 
-      if (elapsed_time < 1000) { // Display the elapsed time for less than 1000 ms
+      if (elapsed_time <
+          1000) { // Display the elapsed time for less than 1000 ms
         char str[4];
         int milliseconds = elapsed_time;
 
+        // Clear the previous time displayed and write "0."
         lcd_set_cursor_position(1, 7);
         delay_us(100);
         str_write("          ");
@@ -90,6 +113,7 @@ int main(void) {
         str_write("0.");
         delay_us(100);
 
+        // Convert milliseconds to string and display
         itoa(milliseconds, str, 10);
         if (milliseconds < 10) {
           str_write("00");
@@ -101,23 +125,28 @@ int main(void) {
           str_write(str);
         }
 
+        // Display the "s" (seconds) unit
         delay_us(100);
         str_write("s");
+
       } else if (elapsed_time < 10000) { // 10 seconds is 10000ms
         char str[5];
         int seconds = elapsed_time / 1000;
         int milliseconds = elapsed_time % 1000;
 
+        // Clear the previous time displayed
         lcd_set_cursor_position(1, 7);
         delay_us(100);
         str_write("          ");
         lcd_set_cursor_position(1, 7);
 
+        // Display the seconds part
         itoa(seconds, str, 10);
         str_write(str);
         delay_us(100);
         str_write(".");
 
+        // Display the milliseconds part
         itoa(milliseconds, str, 10);
         if (milliseconds < 10) {
           str_write("00");
@@ -129,26 +158,34 @@ int main(void) {
           str_write(str);
         }
 
+        // Display the "s" (seconds) unit
         delay_us(100);
         str_write("s");
-      } else {
-        lcd_set_cursor_position(1, 0); // set cursor to second row, first column
+
+      } else { // Display "TIME = 9.999s" if elapsed time is greater than or
+               // equal to 10000ms
+        lcd_set_cursor_position(1, 0);
         delay_us(100);
-        str_write("TIME = 9.999s"); // write *=SET #=GO --:-- to second line
+        str_write("TIME = 9.999s");
       }
 
       delay_us(10000000);
+
+      // Wait for the button to be pressed to reset the timer
       while (1) {
         if (GPIOC->IDR & GPIO_IDR_ID13) {
+          // Reset the timer and states
           elapsed_time = 0;
           display_state = 0;
           reset_state = 1;
-          lcd_set_cursor_position(1,
-                                  0); // set cursor to second row, first column
+
+          // Display the "PUSH SW TO TRIG" message
+          lcd_set_cursor_position(1, 0);
           delay_us(100);
-          str_write(
-              "PUSH SW TO TRIG ");
+          str_write("PUSH SW TO TRIG ");
           delay_us(10000000);
+
+          // Exit the loop
           break;
         }
       }

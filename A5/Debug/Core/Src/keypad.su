@@ -1,0 +1,3 @@
+../Core/Src/keypad.c:40:6:keypad_init	4	static
+../Core/Src/keypad.c:54:5:keypad_read	24	static
+../Core/Src/keypad.c:75:5:check_row_col	24	static
