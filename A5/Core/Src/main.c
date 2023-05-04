@@ -1,5 +1,7 @@
 
 #include "main.h"
+#include "dac.h"
+#include "keypad.h"
 
 void SystemClock_Config(void);
 
@@ -11,48 +13,20 @@ int main(void)
 
   RCC-> AHB2ENR |= (RCC_AHB2ENR_GPIOAEN);
   RCC-> AHB2ENR |= (RCC_AHB2ENR_GPIOBEN);
+  RCC-> AHB2ENR |= (RCC_AHB2ENR_GPIODEN);
   RCC-> APB2ENR |= (RCC_APB2ENR_SPI1EN);
 
   keypad_init();
-  DAC_init();
+  SPI_init();
 
   uint8_t num_key = 0;
   uint32_t output_volt = 0;
 
   while (1)
   {
-     int output = keypad_read(); //get key value
-     if (output != -1){
-    //if not int key pressed reset the values
-        if (output > 9){
-            num_key = 0;
-            output_volt = 0;
-            DAC_write(0);
-        }
-
-        //first key is 100 hundreds
-        else if (num_key == 0){
-            output_volt = (output * 100);
-            num_key++;
-         }
-
-        //2nd key is 10s
-        else if (num_key == 1){
-            output_volt = output_volt + (output * 10);
-            num_key++;
-        }
-
-        //3rd key is ones
-        else{ //third press write to dac and reset the values
-            output_volt = output_volt + (output);
-            uint32_t dig_val = DAC_volt_conv((output_volt * 10) + 200);
-            DAC_write(dig_val);
-            output_volt = 0;
-            num_key = 0;
-        }
-
-        HAL_Delay(300);
-     }
+	  output_volt = 999;
+	  uint32_t dig_val = DAC_volt_conv((output_volt * 10) + 200);
+	  DAC_write(dig_val);
   }
 }
 

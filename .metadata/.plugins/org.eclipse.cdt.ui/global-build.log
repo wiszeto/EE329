@@ -1,30 +1,217 @@
-18:10:40 **** Incremental Build of configuration Debug for project A5 ****
+18:00:41 **** Incremental Build of configuration Debug for project A5 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:16:3: warning: implicit declaration of function 'keypad_init' [-Wimplicit-function-declaration]
-   16 |   keypad_init();
-      |   ^~~~~~~~~~~
-../Core/Src/main.c:17:3: warning: implicit declaration of function 'DAC_init' [-Wimplicit-function-declaration]
-   17 |   DAC_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:24:19: warning: implicit declaration of function 'keypad_read' [-Wimplicit-function-declaration]
-   24 |      int output = keypad_read(); //get key value
-      |                   ^~~~~~~~~~~
-../Core/Src/main.c:30:13: warning: implicit declaration of function 'DAC_write' [-Wimplicit-function-declaration]
-   30 |             DAC_write(0);
-      |             ^~~~~~~~~
-../Core/Src/main.c:48:32: warning: implicit declaration of function 'DAC_volt_conv' [-Wimplicit-function-declaration]
-   48 |             uint32_t dig_val = DAC_volt_conv((output_volt * 10) + 200);
-      |                                ^~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
 arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: A5.elf
  
 arm-none-eabi-size   A5.elf 
 arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
    text	   data	    bss	    dec	    hex	filename
-   5940	     52	   1572	   7564	   1d8c	A5.elf
+   5628	     20	   1572	   7220	   1c34	A5.elf
 Finished building: default.size.stdout
  
 Finished building: A5.list
+ 
+18:00:44 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-size   A5.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5628	     20	   1572	   7220	   1c34	A5.elf
+Finished building: default.size.stdout
+ 
+18:01:43 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5536	     20	   1572	   7128	   1bd8	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:07:53 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:47:6: warning: type of 'dig_val' defaults to 'int' [-Wimplicit-int]
+   47 | void DAC_write(dig_val) {
+      |      ^~~~~~~~~
+../Core/Src/dac.c:50:14: warning: unused variable 'data' [-Wunused-variable]
+   50 |     uint32_t data = config_bits + dig_val;
+      |              ^~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5676	     20	   1572	   7268	   1c64	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:11:16 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:47:6: warning: type of 'dig_val' defaults to 'int' [-Wimplicit-int]
+   47 | void DAC_write(dig_val) {
+      |      ^~~~~~~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5660	     20	   1572	   7252	   1c54	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:11:41 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:20:3: warning: implicit declaration of function 'SPI_init' [-Wimplicit-function-declaration]
+   20 |   SPI_init();
+      |   ^~~~~~~~
+../Core/Src/main.c:28:23: warning: implicit declaration of function 'DAC_volt_conv' [-Wimplicit-function-declaration]
+   28 |    uint32_t dig_val = DAC_volt_conv((output_volt * 10) + 200);
+      |                       ^~~~~~~~~~~~~
+../Core/Src/main.c:29:4: warning: implicit declaration of function 'DAC_write' [-Wimplicit-function-declaration]
+   29 |    DAC_write(dig_val);
+      |    ^~~~~~~~~
+../Core/Src/main.c:22:11: warning: unused variable 'num_key' [-Wunused-variable]
+   22 |   uint8_t num_key = 0;
+      |           ^~~~~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5660	     20	   1572	   7252	   1c54	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:18:55 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:47:6: warning: type of 'dig_val' defaults to 'int' [-Wimplicit-int]
+   47 | void DAC_write(dig_val) {
+      |      ^~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:20:3: warning: implicit declaration of function 'SPI_init' [-Wimplicit-function-declaration]
+   20 |   SPI_init();
+      |   ^~~~~~~~
+../Core/Src/main.c:28:23: warning: implicit declaration of function 'DAC_volt_conv' [-Wimplicit-function-declaration]
+   28 |    uint32_t dig_val = DAC_volt_conv((output_volt * 10) + 200);
+      |                       ^~~~~~~~~~~~~
+../Core/Src/main.c:29:4: warning: implicit declaration of function 'DAC_write' [-Wimplicit-function-declaration]
+   29 |    DAC_write(dig_val);
+      |    ^~~~~~~~~
+../Core/Src/main.c:22:11: warning: unused variable 'num_key' [-Wunused-variable]
+   22 |   uint8_t num_key = 0;
+      |           ^~~~~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5628	     20	   1572	   7220	   1c34	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:19:57 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:20:3: warning: implicit declaration of function 'SPI_init' [-Wimplicit-function-declaration]
+   20 |   SPI_init();
+      |   ^~~~~~~~
+../Core/Src/main.c:28:23: warning: implicit declaration of function 'DAC_volt_conv' [-Wimplicit-function-declaration]
+   28 |    uint32_t dig_val = DAC_volt_conv((output_volt * 10) + 200);
+      |                       ^~~~~~~~~~~~~
+../Core/Src/main.c:29:4: warning: implicit declaration of function 'DAC_write' [-Wimplicit-function-declaration]
+   29 |    DAC_write(dig_val);
+      |    ^~~~~~~~~
+../Core/Src/main.c:22:11: warning: unused variable 'num_key' [-Wunused-variable]
+   22 |   uint8_t num_key = 0;
+      |           ^~~~~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5632	     20	   1572	   7224	   1c38	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:20:13 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-size   A5.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5632	     20	   1572	   7224	   1c38	A5.elf
+Finished building: default.size.stdout
+ 
+18:27:00 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-size   A5.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5632	     20	   1572	   7224	   1c38	A5.elf
+Finished building: default.size.stdout
+ 
+18:36:26 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:47:6: warning: type of 'dig_val' defaults to 'int' [-Wimplicit-int]
+   47 | void DAC_write(dig_val) {
+      |      ^~~~~~~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5636	     20	   1572	   7228	   1c3c	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:36:45 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:47:6: warning: type of 'dig_val' defaults to 'int' [-Wimplicit-int]
+   47 | void DAC_write(dig_val) {
+      |      ^~~~~~~~~
+arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A5.elf
+ 
+arm-none-eabi-size   A5.elf 
+arm-none-eabi-objdump -h -S  A5.elf  > "A5.list"
+   text	   data	    bss	    dec	    hex	filename
+   5636	     20	   1572	   7228	   1c3c	A5.elf
+Finished building: default.size.stdout
+ 
+Finished building: A5.list
+ 
+18:38:44 **** Incremental Build of configuration Debug for project A5 ****
+make -j16 all 
+arm-none-eabi-size   A5.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5636	     20	   1572	   7228	   1c3c	A5.elf
+Finished building: default.size.stdout
  

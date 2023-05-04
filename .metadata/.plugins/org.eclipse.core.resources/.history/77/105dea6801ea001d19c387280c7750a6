@@ -1,0 +1,56 @@
+#include "main.h"
+#include "dac.h"
+#define Vref 3300
+
+void DAC_init(void){
+  //configure GPIO
+  //set as alternative function mode mode because outputting to the DAC
+  GPIOA-> MODER &= ~(GPIO_MODER_MODE4|
+                     GPIO_MODER_MODE5|
+                     GPIO_MODER_MODE7);
+
+  GPIOA-> MODER |= (GPIO_MODER_MODE4_1|
+                    GPIO_MODER_MODE5_1|
+                    GPIO_MODER_MODE7_1);
+
+  GPIOA->AFR[0] &= ~(GPIO_AFRL_AFSEL4|
+                     GPIO_AFRL_AFSEL5|
+                     GPIO_AFRL_AFSEL7);
+
+  GPIOA->AFR[0] |=(5<<GPIO_AFRL_AFSEL4_Pos|
+                   5<<GPIO_AFRL_AFSEL5_Pos|
+                   5<<GPIO_AFRL_AFSEL7_Pos);
+
+  //configure SPI1
+  //MSTR bit in the CR1 register is set to configure SPI1 as the master
+  SPI1-> CR1 |= SPI_CR1_MSTR;
+  //SSOE, NSSP, and DS bits in the CR2 register are set Slave Select output, NSS pulse management, and data size.
+  SPI1-> CR2 |= SPI_CR2_SSOE | SPI_CR2_NSSP | (0xF << SPI_CR2_DS_Pos);
+  //SPE bit in the CR1 register is set to enable the SPI1 peripheral
+  SPI1-> CR1 |= SPI_CR1_SPE;
+}
+
+void DAC_write(dig_val) {
+	/*his function is used to write a digital value (dig_val) to the DAC. It first checks if the SPI1 buffer is empty by verifying the TXE (Transmit Buffer Empty) flag in the SR (Status Register). If the buffer is empty, the function writes the digital value to the SPI1 DR (Data Register), which is then transmitted to the DAC.*/
+    //masking config bits onto digital val
+    uint32_t config_bits = dig_val << 3;
+    uint32_t data = config_bits + dig_val;
+
+    //check if the buffer is empty
+    while(!(SPI1->SR & SPI_SR_TXE));
+
+    //writing to the DAC
+    SPI1->DR = dig_val;
+}
+
+uint32_t DAC_volt_conv(uint32_t analog_val){
+	/*This function takes an input voltage value (analog_val) and converts it to the corresponding digital value (dig_val) that the DAC can use. It first checks if the input voltage is greater than the reference voltage (Vref, 3300 mV in this case). If it is, the input voltage is capped at the reference voltage. The function then calculates the corresponding digital value using a simple conversion formula and returns it.*/
+    //check if vref greater than 3300 mV
+    if(analog_val > Vref){
+        analog_val = Vref;
+    }
+
+    //convert to digital value
+    uint32_t dig_val = (analog_val * 4095) / Vref;
+    return dig_val;
+}

@@ -30,7 +30,7 @@
 static const char keys[4][3] = {{'1', '2', '3'},
                                {'4', '5', '6'},
                                {'7', '8', '9'},
-                               {'*', '0', '#'}};
+                               {'10', '11', '12'}};
 
 static    int cols[3] = {Col1, Col2, Col3}; //corresponds to GPIO pins
 static    int rows[4] = {Row1, Row2, Row3, Row4}; //coresponds to GPIO pins
