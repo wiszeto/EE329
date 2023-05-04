@@ -1,3 +1,5 @@
-dac.c:8:6:SPI_init	1
-dac.c:35:10:DAC_volt_conv	2
-dac.c:47:6:DAC_write	2
+dac.c:11:6:SPI_init	1
+dac.c:42:10:DAC_volt_conv	2
+dac.c:54:6:DAC_write	3
+dac.c:66:6:SPI_select_slave	1
+dac.c:70:6:SPI_deselect_slave	1
