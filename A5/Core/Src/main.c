@@ -1,19 +1,18 @@
 
 #include "main.h"
 #include "dac.h"
+#include "delay.h"
 #include "keypad.h"
 
 void SystemClock_Config(void);
 
 int main(void) {
   HAL_Init();
-
   SystemClock_Config();
+  SysTick_Init();
 
-  RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOAEN);
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOBEN);
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIODEN);
-  RCC->APB2ENR |= (RCC_APB2ENR_SPI1EN);
 
   keypad_init();
   SPI_init();
@@ -45,12 +44,12 @@ int main(void) {
       // 3rd key is ones
       else { // third press write to dac and reset the values
         output_volt = output_volt + (output);
-        uint32_t dig_val = DAC_volt_conv((output_volt * 10));
+        uint32_t dig_val = DAC_volt_conv((output_volt * 10)); // change to mV
         DAC_write(dig_val);
         output_volt = 0;
         num_key = 0;
       }
-      HAL_Delay(500); // change this later,
+      delay_us(500000);
     }
   }
 }
