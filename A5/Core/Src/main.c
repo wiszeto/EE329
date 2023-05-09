@@ -1,4 +1,15 @@
+/*******************************************************************
+ * Project Name: Voltage DAC interface
+ * Author: Wilson Szeto - wiszeto@calpoly.edu
+ * Date: May 7, 2023
+ * Description: A program to interface with the DAC IC. Enter numbers
+ *                      keypad to output a voltage on the DAC.
+ * Citations:
+ *            Szeto, Wilson. (2023-Apr-30). "EE 329 code referenced here".
+ *            Retrieved from https://github.com/wiszeto/EE329
+ *******************************************************************/
 
+//includes
 #include "main.h"
 #include "dac.h"
 #include "delay.h"
@@ -7,13 +18,14 @@
 void SystemClock_Config(void);
 
 int main(void) {
-  HAL_Init();
-  SystemClock_Config();
-  SysTick_Init();
-
+  //timers
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOBEN);
   RCC->AHB2ENR |= (RCC_AHB2ENR_GPIODEN);
 
+  //inits
+  HAL_Init();
+  SystemClock_Config();
+  SysTick_Init();
   keypad_init();
   SPI_init();
 
@@ -23,8 +35,7 @@ int main(void) {
   while (1) {
     int output = keypad_read(4, 3); // get key value
     if (output != -1) {
-      // if not int key pressed reset the values
-      if (output > 9) {
+      if (output > 9) {// if not int key pressed reset the values
         num_key = 0;
         output_volt = 0;
         DAC_write(0);

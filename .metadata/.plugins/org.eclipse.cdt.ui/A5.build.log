@@ -1,16 +1,25 @@
-15:34:22 **** Incremental Build of configuration Debug for project A5 ****
+20:41:17 **** Incremental Build of configuration Debug for project A5 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:18:3: warning: implicit declaration of function 'SPI_init' [-Wimplicit-function-declaration]
-   18 |   SPI_init();
-      |   ^~~~~~~~
-../Core/Src/main.c:30:9: warning: implicit declaration of function 'DAC_write' [-Wimplicit-function-declaration]
-   30 |         DAC_write(0);
-      |         ^~~~~~~~~
-../Core/Src/main.c:47:28: warning: implicit declaration of function 'DAC_volt_conv' [-Wimplicit-function-declaration]
-   47 |         uint32_t dig_val = DAC_volt_conv((output_volt * 10)); // change to mV
-      |                            ^~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+In file included from ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h:157,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h:29,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32l4xx_hal_conf.h:258,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:8,
+                 from ../Core/Inc/dac.h:3,
+                 from ../Core/Src/dac.c:14:
+../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4a6xx.h:1484: warning: "DAC" redefined
+ 1484 | #define DAC                 ((DAC_TypeDef *) DAC1_BASE)
+      | 
+In file included from ../Core/Src/dac.c:14:
+../Core/Inc/dac.h:2: note: this is the location of the previous definition
+    2 | #define DAC
+      | 
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:88:1: warning: control reaches end of non-void function [-Wreturn-type]
+   88 | }
+      | ^
 arm-none-eabi-gcc -o "A5.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A5\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A5.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: A5.elf
  
@@ -23,5 +32,5 @@ Finished building: default.size.stdout
 Finished building: A5.list
  
 
-15:34:23 Build Finished. 0 errors, 3 warnings. (took 610ms)
+20:41:18 Build Finished. 0 errors, 2 warnings. (took 911ms)
 

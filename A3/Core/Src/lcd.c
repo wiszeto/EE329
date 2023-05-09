@@ -24,8 +24,9 @@
  */
 
 //includes
-#include "delay.h"
 #include "lcd.h"
+#include "delay.h"
+
 
 //prototypes
 void LCD_init(void);
@@ -33,6 +34,7 @@ void Nybble();
 void command(uint8_t command);
 void write(char letter);
 void lcd_set_cursor_position(uint8_t row, uint8_t col);
+int LCD_convert_ascii_to_time ( uint8_t asctime );
 
 //data bus array
 uint16_t GPIO_Pin[] = {D4, D5, D6, D7};
@@ -202,6 +204,10 @@ void load_time(int total_seconds) {
   time_asc[2] = LCD_convert_time_to_ascii(l_min);
   time_asc[1] = LCD_convert_time_to_ascii(u_sec);
   time_asc[0] = LCD_convert_time_to_ascii(l_sec);
+}
+
+int LCD_convert_ascii_to_time ( uint8_t asctime ){
+	return (0x0F & asctime);
 }
 
 

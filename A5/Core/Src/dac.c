@@ -1,7 +1,18 @@
-
+/*******************************************************************
+ * Module Name: DAC interface
+ * Author: Wilson Szeto - wiszeto@calpoly.edu
+ * Date: May 7, 2023
+ * Description: A program to initilize and write to the DAC
+ * Pins:    PA4 SPI1_NSS
+ * 			PA5 SPI1_SCK
+ * 			PA7 SPI1_MOSI
+ * Citations:
+ *            Szeto, Wilson. (2023-Apr-30). "EE 329 code referenced here".
+ *            Retrieved from https://github.com/wiszeto/EE329
+ *******************************************************************/
 // includes
-#include "main.h"
 #include "dac.h"
+#include "main.h"
 #define Vref 3300
 
 // PA4 SPI1_NSS
