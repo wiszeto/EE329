@@ -13,14 +13,14 @@
  ******************************************************************************
  * wiring    :
  * Column Output Pins
- * PC0 - Column Pin 1
- * PC1 - Column Pin 2
- * PC2 - Column Pin 3
+ * PB0 - CN7-3 - Column Pin 1
+ * PB1 - CN7-5 - Column Pin 2
+ * PB2 - CN7-7 - Column Pin 3
  * Row Input Pins
- * PB0 - Row Pin 1
- * PB1 - Row Pin 2
- * PB2 - Row Pin 3
- * PB3 - Row Pin 4
+ * PD0 - CN9-3 - Row Pin 1
+ * PD1 - CN9-7 - Row Pin 2
+ * PD2 - CN10-9 - Row Pin 3
+ * PD3 - CN9-5 - Row Pin 4
  ******************************************************************************
  */
 
@@ -30,11 +30,11 @@
 static const char keys[4][3] = {{1, 2, 3},
                                {4, 5, 6},
                                {7, 8, 9},
-                               {10, 0, 12}};
+                               {10, 0, 11}};
 
-static    uint32_t cols[3] = {Col1, Col2, Col3}; //corresponds to GPIO pins
-static    uint32_t rows[4] = {Row1, Row2, Row3, Row4}; //Corresponds to GPIO pins
-static    uint32_t delay_time = 10000;
+static    int cols[3] = {Col1, Col2, Col3}; //corresponds to GPIO pins
+static    int rows[4] = {Row1, Row2, Row3, Row4}; //Corresponds to GPIO pins
+static    int delay_time = 10000;
 
 //This function, configures row, column and keypad pin
 void keypad_init() {
