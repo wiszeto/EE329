@@ -13,7 +13,7 @@
 uint32_t wave(uint32_t wave_type, uint32_t offset, uint32_t duty_cycle,
 		uint32_t polarity, uint32_t num_points);
 
-static uint32_t MAX_POINTS = 1140;
+static uint32_t MAX_POINTS = 1150;
 static uint16_t WAVE_CYCLE[9] = { 114, 228, 342, 456, 570, 684, 798, 912, 1026 };
 static uint16_t NSAWTOOTH[1140] = { 3055, 3052, 3049, 3047, 3044, 3042, 3039,
 		3036, 3034, 3031, 3029, 3026, 3023, 3021, 3018, 3016, 3013, 3010, 3008,

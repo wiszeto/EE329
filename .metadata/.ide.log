@@ -1,0 +1,33 @@
+2023-05-11 22:47:36,338 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 794323760 Bytes (956301312)
+2023-05-11 22:47:38,071 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 548065928 Bytes (956301312)
+2023-05-11 22:47:39,380 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 662360712 Bytes (956301312)
+2023-05-11 22:47:39,572 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-05-11 22:47:39,572 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-05-11 22:47:39,573 [INFO] CodeGenerator:793 - code generatio: config db path: C:\Users\Wilso\Desktop\329\STM32CubeIDE_1.12.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.8.0.202302231600\\db\
+2023-05-11 22:47:39,733 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\MXTmpFiles\license.tmp_save
+2023-05-11 22:47:39,863 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\MXTmpFiles\license.tmp
+2023-05-11 22:47:39,889 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\Core\Src\stm32l4xx_it.c_save
+2023-05-11 22:47:40,127 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\Core\Src\stm32l4xx_it.c
+2023-05-11 22:47:40,138 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\Core\Inc\stm32l4xx_it.h_save
+2023-05-11 22:47:40,209 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\Core\Inc\stm32l4xx_it.h
+2023-05-11 22:47:40,264 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\Core\Src\stm32l4xx_hal_msp.c_save
+2023-05-11 22:47:40,343 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\Core\Src\stm32l4xx_hal_msp.c
+2023-05-11 22:47:40,351 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\MXTmpFiles\system.tmp_save
+2023-05-11 22:47:40,398 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\MXTmpFiles\system.tmp
+2023-05-11 22:47:40,417 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\Core\Inc\stm32l4xx_hal_conf.h_save
+2023-05-11 22:47:40,516 [INFO] CodeEngine:335 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\Core\Inc\stm32l4xx_hal_conf.h
+2023-05-11 22:47:40,575 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\Core\Inc\main.h_save
+2023-05-11 22:47:40,650 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\Core\Inc\main.h
+2023-05-11 22:47:40,667 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\Wilso\Desktop\Code\C\P2\Core\Src\main.c_save
+2023-05-11 22:47:40,799 [INFO] CodeEngine:279 - Generated code: C:\Users\Wilso\Desktop\Code\C\P2\Core\Src\main.c
+2023-05-11 22:47:41,452 [INFO] ProjectBuilder:2996 - Time for Copy HAL[1] : 253mS.
+2023-05-11 22:47:41,457 [INFO] ProjectBuilder:4304 - Project Generator version: 3.19.2
+2023-05-11 22:47:41,689 [INFO] ConfigFileManager:1483 - The Die is : DIE461
+2023-05-11 22:47:41,697 [INFO] ApiDbMcu:507 - Load IP Config File for FATFS
+2023-05-11 22:47:41,706 [INFO] ApiDbMcu:507 - Load IP Config File for FREERTOS
+2023-05-11 22:47:41,737 [INFO] ApiDbMcu:507 - Load IP Config File for TOUCHSENSING
+2023-05-11 22:47:41,747 [INFO] ApiDbMcu:507 - Load IP Config File for USB_DEVICE
+2023-05-11 22:47:41,756 [INFO] ApiDbMcu:507 - Load IP Config File for USB_HOST
+2023-05-11 22:47:43,303 [INFO] ProjectBuilder:4505 - Time for Generating toolchain IDE Files: 1846mS.
+2023-05-11 22:47:43,303 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.
+2023-05-11 22:47:43,305 [INFO] ProjectBuilder:2867 - Time for Copy CMSIS : 0mS.

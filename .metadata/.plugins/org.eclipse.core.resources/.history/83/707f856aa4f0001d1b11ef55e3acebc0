@@ -33,7 +33,7 @@ int main(void) {
 
 	RCC->APB1ENR1 |= RCC_APB1ENR1_TIM2EN;           // enable clock for TIM2
 	TIM2->DIER |= (TIM_DIER_UIE);  // enable event gen, rcv CCR1
-	TIM2->ARR = 280;         // ARR = T = counts @4MHz
+	TIM2->ARR = 279;         // ARR = T = counts @4MHz
 	TIM2->SR &= ~(TIM_SR_UIF);       // clr IRQ flag in status reg
 	NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));     // set NVIC interrupt: 0x1F
 	__enable_irq();                                 // global IRQ enable
@@ -122,7 +122,7 @@ int main(void) {
 			}
 
 			delay_us(300000); //300ms
-//			NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));
+			NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));
 		}
 
 	}
@@ -133,8 +133,8 @@ void TIM2_IRQHandler(void) {
 	GPIOE->BSRR = (GPIO_PIN_15);
 	if (TIM2->SR & TIM_SR_UIF) {
 		TIM2->SR &= ~(TIM_SR_UIF);
-//		if (keypad_read(4, 3) != -1)
-//			NVIC->ICER[0] |= (1 << (TIM2_IRQn & 0x1F));
+		if (keypad_read(4, 3) != -1)
+			NVIC->ICER[0] |= (1 << (TIM2_IRQn & 0x1F));
 
 		if (count < MAX_POINTS) {
 			wave(wave_type, count, duty_cycle, polarity, MAX_POINTS);

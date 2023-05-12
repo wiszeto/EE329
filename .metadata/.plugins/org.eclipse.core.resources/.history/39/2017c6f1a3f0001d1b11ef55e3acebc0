@@ -122,7 +122,7 @@ int main(void) {
 			}
 
 			delay_us(300000); //300ms
-//			NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));
+			NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));
 		}
 
 	}
@@ -133,8 +133,8 @@ void TIM2_IRQHandler(void) {
 	GPIOE->BSRR = (GPIO_PIN_15);
 	if (TIM2->SR & TIM_SR_UIF) {
 		TIM2->SR &= ~(TIM_SR_UIF);
-//		if (keypad_read(4, 3) != -1)
-//			NVIC->ICER[0] |= (1 << (TIM2_IRQn & 0x1F));
+		if (keypad_read(4, 3) != -1)
+			NVIC->ICER[0] |= (1 << (TIM2_IRQn & 0x1F));
 
 		if (count < MAX_POINTS) {
 			wave(wave_type, count, duty_cycle, polarity, MAX_POINTS);
