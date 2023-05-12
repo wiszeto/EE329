@@ -1,0 +1,23 @@
+#include "wavegen.h"
+#include "main.h"
+
+
+
+uint32_t wave(uint8_t wave_type, uint32_t offset, uint32_t duty_cycle,
+		uint32_t num_points) {
+	switch (wave) {
+	//wave = 1 sin
+	case 1:
+		DAC_write(SINE[offset]);
+		break;
+
+		//wave = 0 sqaure_wave
+	default:
+		if (count <= (WAVE_CYCLE[duty_cycle])) {
+			DAC_write(0xBB0); //3v
+		} else {
+			DAC_write(0);
+		}
+		break;
+	}
+}

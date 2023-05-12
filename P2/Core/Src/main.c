@@ -3,15 +3,15 @@
 #include "dac.h"
 #include "lcd.h"
 #include "keypad.h"
+#include "wavegen.h"
 
 void SystemClock_Config(void);
 
 uint32_t frequency = 1;
 uint32_t count = 0;
 uint32_t duty_cycle = 4;
-static uint32_t MAX_POINTS = 1980;
-static uint16_t WAVE_CYCLE[9] = { 198, 396, 594, 792, 990, 1188, 1386, 1584,
-		1782 };
+uint32_t wave_type = 0;
+uint32_t polarity = 0;
 
 int main(void) {
 	RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOBEN);
@@ -25,21 +25,19 @@ int main(void) {
 	keypad_init();
 	SPI_init();
 
+	lcd_set_cursor_position(0, 0);
+	str_write("SQU 100 Hz  LAST");
+	lcd_set_cursor_position(1, 0);
+	str_write("50% DUTY     '9'");
+	command(0x0C);
+
 	RCC->APB1ENR1 |= RCC_APB1ENR1_TIM2EN;           // enable clock for TIM2
 	TIM2->DIER |= (TIM_DIER_UIE);  // enable event gen, rcv CCR1
-	TIM2->ARR = 200;                             // ARR = T = counts @4MHz
+	TIM2->ARR = 280;         // ARR = T = counts @4MHz
 	TIM2->SR &= ~(TIM_SR_UIF);       // clr IRQ flag in status reg
 	NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));     // set NVIC interrupt: 0x1F
 	__enable_irq();                                 // global IRQ enable
 	TIM2->CR1 |= TIM_CR1_CEN;                       // start TIM2 CR1
-	delay_us(1000);
-	lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-	str_write("SQU 100 Hz  LAST");
-	delay_us(1000);
-	lcd_set_cursor_position(1, 0); // set cursor to second row, first column
-	str_write("50% DUTY     '9'");
-	delay_us(1000);
-	command(0x0C);
 
 	// Set pin 1 as output mode
 	GPIOE->MODER &= ~(GPIO_MODER_MODE15);
@@ -49,77 +47,100 @@ int main(void) {
 
 		int output = keypad_read(4, 3); // get key value
 
-		if (output != -1) {
-
-			// if not int key pressed reset the values
+		if (output != -1) { //if key is pressed
 			lcd_set_cursor_position(1, 14);
-			write(output + '0');
+			write(output + '0'); //write latest key at position r1, c14
 
-			if (output < 6) {
+			if ((output < 6) && (output > 0)) { //changes frequency
 				frequency = output;
-				lcd_set_cursor_position(0, 4); // set cursor to second row, first column
-				delay_us(100);
-				write(output + '0');	//change int to ascii and write to board
-			} else if (output == 6) {
-				lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-				delay_us(100);
+				lcd_set_cursor_position(0, 4);
+				write(output + '0'); //write to board
+			} else if (output == 6) { //generate sine wave
+				wave_type = 1; //wave type 1 is sine wave
+				lcd_set_cursor_position(0, 0);
 				str_write("SIN");
+				lcd_set_cursor_position(1, 0);
+				str_write("1980 PTS");
 			} else if (output == 7) {
-				lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-				delay_us(100);
+				wave_type = 2;
+				lcd_set_cursor_position(0, 0);
 				str_write("SAW");
-				delay_us(100);
-				lcd_set_cursor_position(1, 0); // set cursor to second row, first column
-				str_write("POSITIVE");
-				delay_us(100);
+				lcd_set_cursor_position(1, 0);
+				if (polarity)
+					str_write("POSITIVE");
+				else
+					str_write("NEGATIVE");
 			} else if (output == 8) {
-				lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-				delay_us(100);
+				wave_type = 0;
+				lcd_set_cursor_position(1, 0);
+				write(duty_cycle + 1 + '0'); //write to board
+				lcd_set_cursor_position(0, 0);
 				str_write("SQU");
-				delay_us(100);
+				lcd_set_cursor_position(1, 1);
+				str_write("0% DUTY");
 			} else if (output == 9) {
-				lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-				delay_us(100);
+				wave_type = 0;
+				duty_cycle = 4;
+				frequency = 1;
+				lcd_set_cursor_position(0, 4);
+				write('1'); //write to board
+				lcd_set_cursor_position(0, 0);
 				str_write("SQU");
-			}
-			if (output == 10) {
-				if (duty_cycle != 0) {
+				lcd_set_cursor_position(1, 0);
+				write(duty_cycle + 1 + '0');
+				str_write("0% DUTY");
+			} else if (output == 10) {
+				if (duty_cycle != 0)
 					duty_cycle--;
-				}
-
+				lcd_set_cursor_position(1, 0);
+				write(duty_cycle + 1 + '0');
 				lcd_set_cursor_position(1, 14);
 				write('*');
 
-			}
-			if (output == 11) {
-				if (duty_cycle != 8) {
+			} else if (output == 11) {
+				if (duty_cycle != 8)
 					duty_cycle++;
-				}
+				lcd_set_cursor_position(1, 0);
+				write(duty_cycle + 1 + '0');
 				lcd_set_cursor_position(1, 14);
 				write('#');
+			} else if (output == 0) {
+				if (wave_type == 0) {
+					duty_cycle = 4;
+					lcd_set_cursor_position(1, 0);
+					write(duty_cycle + 1 + '0');
+				} else if (wave_type == 2) {
+					polarity = polarity ^ 1;
+					lcd_set_cursor_position(1, 0);
+					if (polarity)
+						str_write("POSITIVE");
+					else
+						str_write("NEGATIVE");
+				}
+				lcd_set_cursor_position(1, 14);
+				write('0');
 			}
 
-			delay_us(25000); //250ms
+			delay_us(300000); //300ms
+			NVIC->ISER[0] |= (1 << (TIM2_IRQn & 0x1F));
 		}
 
 	}
 
 }
-void setup_TIM2(int iDutyCycle) {
 
-}
 void TIM2_IRQHandler(void) {
-
+	GPIOE->BSRR = (GPIO_PIN_15);
 	if (TIM2->SR & TIM_SR_UIF) {
 		TIM2->SR &= ~(TIM_SR_UIF);
+		if (keypad_read(4, 3) != -1)
+			NVIC->ICER[0] |= (1 << (TIM2_IRQn & 0x1F));
+
 		if (count < MAX_POINTS) {
+			wave(wave_type, count, duty_cycle, polarity, MAX_POINTS);
+
 			//increment count by the selected frequency
 			count += frequency;
-			if (count <= (WAVE_CYCLE[duty_cycle])) {
-				DAC_write(0xFFF);
-			} else {
-				DAC_write(0);
-			}
 		}
 		//Once count reached max_points, reset
 		else {
@@ -127,7 +148,7 @@ void TIM2_IRQHandler(void) {
 		}
 
 	}
-
+	GPIOE->BRR = (GPIO_PIN_15);
 }
 
 void SystemClock_Config(void) {

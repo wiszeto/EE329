@@ -137,6 +137,7 @@ void write(char letter) {  //write 1 character on the LCD display
   Nybble(); //send pulse
   control_pins->BRR = (RS);                    // set RS back to zero
   control_pins->ODR &= ~((D4 | D5 | D6 | D7)); // Clears registers
+  delay_us(100);
 }
 
 void lcd_set_cursor_position(uint8_t row, uint8_t col) {
@@ -158,6 +159,7 @@ void str_write(const char *str) { //writes a character array to LCD
     write(str[i]);
     delay_us(100);
   }
+	delay_us(100);
 }
 
 // James imported functions for delay
