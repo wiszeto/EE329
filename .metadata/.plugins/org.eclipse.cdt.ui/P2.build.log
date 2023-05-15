@@ -1,23 +1,61 @@
-02:17:25 **** Incremental Build of configuration Debug for project P2 ****
+18:50:01 **** Incremental Build of configuration Debug for project P2 ****
 make -j16 all 
+arm-none-eabi-gcc "../Core/Src/dac.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dac.d" -MT"Core/Src/dac.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/dac.o"
+arm-none-eabi-gcc "../Core/Src/delay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/delay.d" -MT"Core/Src/delay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/delay.o"
+arm-none-eabi-gcc "../Core/Src/keypad.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/keypad.d" -MT"Core/Src/keypad.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/keypad.o"
+arm-none-eabi-gcc "../Core/Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd.d" -MT"Core/Src/lcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/wavegen.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/wavegen.d" -MT"Core/Src/wavegen.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/wavegen.o"
+In file included from ../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h:157,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h:29,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32l4xx_hal_conf.h:258,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:10,
+                 from ../Core/Inc/dac.h:3,
+                 from ../Core/Src/dac.c:3:
+../Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4a6xx.h:1484: warning: "DAC" redefined
+ 1484 | #define DAC                 ((DAC_TypeDef *) DAC1_BASE)
+      | 
+In file included from ../Core/Src/dac.c:3:
+../Core/Inc/dac.h:2: note: this is the location of the previous definition
+    2 | #define DAC
+      | 
+../Core/Src/dac.c: In function 'DAC_write':
+../Core/Src/dac.c:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+../Core/Src/wavegen.c: In function 'wave':
+../Core/Src/wavegen.c:21:3: warning: implicit declaration of function 'DAC_write' [-Wimplicit-function-declaration]
+   21 |   DAC_write(SINE[offset]);
+      |   ^~~~~~~~~
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:24:2: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
-   24 |  LCD_init();
-      |  ^~~~~~~~
-../Core/Src/main.c:26:2: warning: implicit declaration of function 'SPI_init' [-Wimplicit-function-declaration]
-   26 |  SPI_init();
-      |  ^~~~~~~~
-../Core/Src/main.c:28:2: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
-   28 |  lcd_set_cursor_position(0, 0);
-      |  ^~~~~~~~~~~~~~~~~~~~~~~
-../Core/Src/main.c:32:2: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
-   32 |  command(0x0C);
-      |  ^~~~~~~
-../Core/Src/main.c:52:4: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-   52 |    write(output + '0'); //write latest key at position r1, c14
-      |    ^~~~~
-In file included from ../Core/Src/main.c:6:
+../Core/Src/wavegen.c:39:1: warning: control reaches end of non-void function [-Wreturn-type]
+   39 | }
+      | ^
+In file included from ../Core/Src/wavegen.c:1:
+At top level:
+../Core/Src/main.c:37:3: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
+   37 |   LCD_init();
+      |   ^~~~~~~~
+../Core/Inc/wavegen.h:16:17: warning: 'MAX_POINTS' defined but not used [-Wunused-variable]
+   16 | static uint32_t MAX_POINTS = 1140;
+      |                 ^~~~~~~~~~
+../Core/Src/main.c:39:3: warning: implicit declaration of function 'SPI_init' [-Wimplicit-function-declaration]
+   39 |   SPI_init();
+      |   ^~~~~~~~
+../Core/Src/main.c:42:3: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
+   42 |   lcd_set_cursor_position(0, 0);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:46:3: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
+   46 |   command(0x0C);
+      |   ^~~~~~~
+../Core/Src/main.c:67:7: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+   67 |       write(output + '0'); // write latest key at position r1, c14
+      |       ^~~~~
+In file included from ../Core/Src/main.c:18:
 At top level:
 ../Core/Inc/wavegen.h:202:17: warning: 'SINE' defined but not used [-Wunused-variable]
   202 | static uint16_t SINE[1140] = { 1575, 1583, 1591, 1599, 1608, 1616, 1624, 1632,
@@ -43,5 +81,5 @@ Finished building: default.size.stdout
 Finished building: P2.list
  
 
-02:17:25 Build Finished. 0 errors, 9 warnings. (took 713ms)
+18:50:03 Build Finished. 0 errors, 14 warnings. (took 1s.995ms)
 

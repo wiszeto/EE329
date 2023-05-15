@@ -364,8 +364,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x122 ./Core/Src/main.o
  .debug_macro   0x0000000000000000      0x3ef ./Core/Src/main.o
  .debug_macro   0x0000000000000000      0x433 ./Core/Src/main.o
- .debug_macro   0x0000000000000000       0x40 ./Core/Src/main.o
  .debug_macro   0x0000000000000000       0x4c ./Core/Src/main.o
+ .debug_macro   0x0000000000000000       0x40 ./Core/Src/main.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32l4xx_hal_msp.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32l4xx_hal_msp.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32l4xx_hal_msp.o
@@ -2945,21 +2945,21 @@ LOAD c:/users/wilso/desktop/329/stm32cubeide_1.12.0/stm32cubeide/plugins/com.st.
  .debug_macro   0x000000000002738d      0x1c2 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
  .debug_macro   0x000000000002754f      0x1da ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
 
-.debug_line     0x0000000000000000     0x8604
+.debug_line     0x0000000000000000     0x8600
  .debug_line    0x0000000000000000      0x875 ./Core/Src/dac.o
  .debug_line    0x0000000000000875      0x81a ./Core/Src/delay.o
  .debug_line    0x000000000000108f      0x88e ./Core/Src/keypad.o
  .debug_line    0x000000000000191d      0xa74 ./Core/Src/lcd.o
- .debug_line    0x0000000000002391      0x9a3 ./Core/Src/main.o
- .debug_line    0x0000000000002d34      0x7d7 ./Core/Src/stm32l4xx_hal_msp.o
- .debug_line    0x000000000000350b      0x89a ./Core/Src/stm32l4xx_it.o
- .debug_line    0x0000000000003da5      0x86f ./Core/Src/system_stm32l4xx.o
- .debug_line    0x0000000000004614      0x811 ./Core/Src/wavegen.o
- .debug_line    0x0000000000004e25       0x88 ./Core/Startup/startup_stm32l4a6zgtx.o
- .debug_line    0x0000000000004ead      0xbc7 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
- .debug_line    0x0000000000005a74      0xd6e ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
- .debug_line    0x00000000000067e2      0xd99 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
- .debug_line    0x000000000000757b     0x1089 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
+ .debug_line    0x0000000000002391      0x99d ./Core/Src/main.o
+ .debug_line    0x0000000000002d2e      0x7d7 ./Core/Src/stm32l4xx_hal_msp.o
+ .debug_line    0x0000000000003505      0x89a ./Core/Src/stm32l4xx_it.o
+ .debug_line    0x0000000000003d9f      0x86f ./Core/Src/system_stm32l4xx.o
+ .debug_line    0x000000000000460e      0x813 ./Core/Src/wavegen.o
+ .debug_line    0x0000000000004e21       0x88 ./Core/Startup/startup_stm32l4a6zgtx.o
+ .debug_line    0x0000000000004ea9      0xbc7 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
+ .debug_line    0x0000000000005a70      0xd6e ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
+ .debug_line    0x00000000000067de      0xd99 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
+ .debug_line    0x0000000000007577     0x1089 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
 
 .debug_str      0x0000000000000000    0xee84b
  .debug_str     0x0000000000000000    0xec93b ./Core/Src/dac.o
