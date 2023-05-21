@@ -1,10 +1,17 @@
-09:08:35 **** Incremental Build of configuration Debug for project A6 ****
+19:50:50 **** Incremental Build of configuration Debug for project A6 ****
 make -j16 all 
+arm-none-eabi-gcc "../Core/Src/uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart.d" -MT"Core/Src/uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart.o"
+arm-none-eabi-gcc -o "A6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A6\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: A6.elf
+ 
 arm-none-eabi-size   A6.elf 
+arm-none-eabi-objdump -h -S  A6.elf  > "A6.list"
    text	   data	    bss	    dec	    hex	filename
-   5668	     20	   1572	   7260	   1c5c	A6.elf
+   6528	     28	   1572	   8128	   1fc0	A6.elf
 Finished building: default.size.stdout
  
+Finished building: A6.list
+ 
 
-09:08:35 Build Finished. 0 errors, 0 warnings. (took 222ms)
+19:50:50 Build Finished. 0 errors, 0 warnings. (took 603ms)
 

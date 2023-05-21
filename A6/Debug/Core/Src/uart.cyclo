@@ -1,0 +1,4 @@
+uart.c:4:6:LPUART_init	1
+uart.c:35:6:LPUART_Print_Char	2
+uart.c:41:6:LPUART_Print	2
+uart.c:49:6:LPUART_ESC_Print	3

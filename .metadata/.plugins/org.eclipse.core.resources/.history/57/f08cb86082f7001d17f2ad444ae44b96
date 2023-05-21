@@ -1,0 +1,15 @@
+/*
+ * uart.h
+ *
+ *  Created on: May 20, 2023
+ *      Author: Wilso
+ */
+
+#ifndef INC_UART_H_
+#define INC_UART_H_
+
+void LPUART_init();
+void LPUART_Print(const char *message);
+void LPUART_Print_Char(char ch);
+
+#endif /* INC_UART_H_ */
