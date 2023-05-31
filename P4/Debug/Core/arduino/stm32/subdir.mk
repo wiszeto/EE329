@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (10.3-2021.10)
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+S_UPPER_SRCS += \
+../Core/arduino/stm32/startup_stm32yyxx.S 
+
+OBJS += \
+./Core/arduino/stm32/startup_stm32yyxx.o 
+
+S_UPPER_DEPS += \
+./Core/arduino/stm32/startup_stm32yyxx.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+Core/arduino/stm32/%.o: ../Core/arduino/stm32/%.S Core/arduino/stm32/subdir.mk
+	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
+
+clean: clean-Core-2f-arduino-2f-stm32
+
+clean-Core-2f-arduino-2f-stm32:
+	-$(RM) ./Core/arduino/stm32/startup_stm32yyxx.d ./Core/arduino/stm32/startup_stm32yyxx.o
+
+.PHONY: clean-Core-2f-arduino-2f-stm32
+

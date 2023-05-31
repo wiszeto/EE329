@@ -1,17 +1,25 @@
-19:50:50 **** Incremental Build of configuration Debug for project A6 ****
+10:59:26 **** Build of configuration Debug for project A6 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart.d" -MT"Core/Src/uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:22:2: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
+   22 |  LCD_init();
+      |  ^~~~~~~~
+../Core/Src/main.c:25:2: warning: implicit declaration of function 'LPUART_ESC_Print'; did you mean 'LPUART_Print'? [-Wimplicit-function-declaration]
+   25 |  LPUART_ESC_Print("\033[3B\033[5C");
+      |  ^~~~~~~~~~~~~~~~
+      |  LPUART_Print
 arm-none-eabi-gcc -o "A6.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\A6\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="A6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: A6.elf
  
 arm-none-eabi-size   A6.elf 
 arm-none-eabi-objdump -h -S  A6.elf  > "A6.list"
    text	   data	    bss	    dec	    hex	filename
-   6528	     28	   1572	   8128	   1fc0	A6.elf
+   6192	     28	   1572	   7792	   1e70	A6.elf
 Finished building: default.size.stdout
  
 Finished building: A6.list
  
 
-19:50:50 Build Finished. 0 errors, 0 warnings. (took 603ms)
+10:59:27 Build Finished. 0 errors, 2 warnings. (took 789ms)
 

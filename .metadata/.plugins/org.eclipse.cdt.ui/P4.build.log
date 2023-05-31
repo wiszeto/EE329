@@ -1,0 +1,27 @@
+15:33:28 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:17:2: warning: implicit declaration of function 'LCD_init' [-Wimplicit-function-declaration]
+   17 |  LCD_init();
+      |  ^~~~~~~~
+../Core/Src/main.c:18:2: warning: implicit declaration of function 'command' [-Wimplicit-function-declaration]
+   18 |  command(0x0C);
+      |  ^~~~~~~
+../Core/Src/main.c:28:2: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
+   28 |  lcd_set_cursor_position(0, 0); // set cursor to second row, first column
+      |  ^~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+   6760	     28	   1836	   8624	   21b0	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+
+15:33:29 Build Finished. 0 errors, 3 warnings. (took 989ms)
+

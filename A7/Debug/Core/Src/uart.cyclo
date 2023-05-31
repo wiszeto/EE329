@@ -1,0 +1,11 @@
+uart.c:23:6:LPUART_init	1
+uart.c:50:6:LPUART_Print	3
+uart.c:61:6:LPUART_ESC_Print	1
+uart.c:67:6:Terminal_Init	1
+uart.c:82:10:Samples_Min	3
+uart.c:93:10:Samples_Max	3
+uart.c:104:10:Samples_Ave	2
+uart.c:115:6:Update_Counts	1
+uart.c:132:6:Update_Volts	1
+uart.c:150:6:Digit_Write	11
+uart.c:183:6:Terminal_Values	1

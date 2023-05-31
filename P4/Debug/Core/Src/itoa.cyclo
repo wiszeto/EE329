@@ -1,0 +1,4 @@
+itoa.c:66:14:itoa	1
+itoa.c:71:14:ltoa	12
+itoa.c:119:14:utoa	1
+itoa.c:127:14:ultoa	8

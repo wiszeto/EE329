@@ -45,42 +45,42 @@ int main(void) {
 }
 
 // UART interrupt service routine
-void LPUART1_IRQHandler(void) {
-	if (LPUART1->ISR & USART_ISR_RXNE) { // check if there is new data in the UART receiver
-		char charRecv = LPUART1->RDR;  // read the received character
-		switch (charRecv) {
-		case 'R': // if received character is 'R'
-			LPUART_ESC_Print("\033[31m"); // change color to red
-			while (!(LPUART1->ISR & USART_ISR_TXE))
-				;  // wait for empty TX buffer
-			LPUART1->TDR = charRecv; // send received character
-			break;
-		case 'G':
-			LPUART_ESC_Print("\033[32m"); // change color to green
-			while (!(LPUART1->ISR & USART_ISR_TXE))
-				;  // wait for empty TX buffer
-			LPUART1->TDR = charRecv; // send received character
-			break;
-		case 'B':
-			LPUART_ESC_Print("\033[34m"); // change color to blue
-			while (!(LPUART1->ISR & USART_ISR_TXE))
-				;  // wait for empty TX buffer
-			LPUART1->TDR = charRecv; // send received character
-			break;
-		case 'W':
-			LPUART_ESC_Print("\033[37m"); // change color to white
-			while (!(LPUART1->ISR & USART_ISR_TXE))
-				;  // wait for empty TX buffer
-			LPUART1->TDR = charRecv; // send received character
-			break;
-		default: // if received character is none of the above
-			while (!(LPUART1->ISR & USART_ISR_TXE))
-				;  // wait for empty TX buffer
-			LPUART1->TDR = charRecv; // send received character
-			break;
-		}  // end switch
-	}
-}
+//void LPUART1_IRQHandler(void) {
+//	if (LPUART1->ISR & USART_ISR_RXNE) { // check if there is new data in the UART receiver
+//		char charRecv = LPUART1->RDR;  // read the received character
+//		switch (charRecv) {
+//		case 'R': // if received character is 'R'
+//			LPUART_ESC_Print("\033[31m"); // change color to red
+//			while (!(LPUART1->ISR & USART_ISR_TXE))
+//				;  // wait for empty TX buffer
+//			LPUART1->TDR = charRecv; // send received character
+//			break;
+//		case 'G':
+//			LPUART_ESC_Print("\033[32m"); // change color to green
+//			while (!(LPUART1->ISR & USART_ISR_TXE))
+//				;  // wait for empty TX buffer
+//			LPUART1->TDR = charRecv; // send received character
+//			break;
+//		case 'B':
+//			LPUART_ESC_Print("\033[34m"); // change color to blue
+//			while (!(LPUART1->ISR & USART_ISR_TXE))
+//				;  // wait for empty TX buffer
+//			LPUART1->TDR = charRecv; // send received character
+//			break;
+//		case 'W':
+//			LPUART_ESC_Print("\033[37m"); // change color to white
+//			while (!(LPUART1->ISR & USART_ISR_TXE))
+//				;  // wait for empty TX buffer
+//			LPUART1->TDR = charRecv; // send received character
+//			break;
+//		default: // if received character is none of the above
+//			while (!(LPUART1->ISR & USART_ISR_TXE))
+//				;  // wait for empty TX buffer
+//			LPUART1->TDR = charRecv; // send received character
+//			break;
+//		}  // end switch
+//	}
+//}
 
 void SystemClock_Config(void) {
 	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };

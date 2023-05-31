@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;A7/Core/Inc/delay.h&apos; to &apos;delay_us.h&apos;" description="Rename resource &apos;delay.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/delay.h" name="delay_us.h" stamp="1685247457746" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;A7/Core/Src/delay.c&apos; to &apos;delay_us.c&apos;" description="Rename resource &apos;delay.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/delay.c" name="delay_us.c" stamp="1685247480434" updateReferences="true"/>
+</session>
