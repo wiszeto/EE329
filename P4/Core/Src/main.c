@@ -1,8 +1,8 @@
 #include "main.h"
 #include "uart.h"
-#include "lcd.h"
+//#include "lcd.h"
 #include "delay.h"
-//#include <arduino.h>
+
 
 void SystemClock_Config(void);
 #define BUFFER_SIZE 256
@@ -14,8 +14,9 @@ int main(void) {
 	HAL_Init();
 	SystemClock_Config();
 	LPUART_init();
-	LCD_init();
-	command(0x0C);
+	//LCD_init();
+	//command(0x0C);
+
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;  // GPIOC clock init
 	GPIOC->MODER &= ~(GPIO_MODER_MODE13); // button init
 	GPIOC->PUPDR &= ~(GPIO_PUPDR_PUPD13_1);
@@ -25,26 +26,29 @@ int main(void) {
 	GPIOB->MODER |= (GPIO_MODER_MODE7_0); // LD2 output mode
 
 	delay_us(100);
-	lcd_set_cursor_position(0, 0); // set cursor to second row, first column
+	USART_init();
+	USART_print("Hello");
 	while (1) {
-		if (flag) {
-			delay_us(10000);
-			flag = 0;
-			str_write("Welcome ");
-			str_write(buffer);  // process the string
+//		USART_print("Hello");
+//		if (flag) {
+//			delay_us(10000);
+//			flag = 0;
+//			str_write("Welcome ");
+//			str_write(buffer);  // process the string
+//
+//			lcd_set_cursor_position(1, 0); // set cursor to second row, first column
+//			str_write("Put fngr on sens");
+//			lcd_set_cursor_position(0, 0); // set cursor to second row, first column
+//		}
+//		if (GPIOC->IDR & GPIO_IDR_ID13) { // Check if the button is pressed
+//			GPIOB->BSRR = GPIO_PIN_7;
+//			delay_us(10000);
+//			while (!(LPUART1->ISR & USART_ISR_TXE));
+//			LPUART_Print("WILSON\n");
+//			delay_us(1000000);
+//		}
+//		GPIOB->BRR = GPIO_PIN_7;
 
-			lcd_set_cursor_position(1, 0); // set cursor to second row, first column
-			str_write("Put fngr on sens");
-			lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-		}
-		if (GPIOC->IDR & GPIO_IDR_ID13) { // Check if the button is pressed
-			GPIOB->BSRR = GPIO_PIN_7;
-			delay_us(10000);
-			while (!(LPUART1->ISR & USART_ISR_TXE));
-			LPUART_Print("WILSON\n");
-			delay_us(1000000);
-		}
-		GPIOB->BRR = GPIO_PIN_7;
 	}
 }
 
@@ -68,6 +72,19 @@ void LPUART1_IRQHandler(void) {
 
 		GPIOB->BRR = GPIO_PIN_7;
 	}
+}
+
+void USART2_IRQHandler(void){
+
+  if (USART2->ISR & USART_ISR_RXNE){
+    char character = USART2->RDR;
+    switch (character){
+        default:
+            while (!(USART2->ISR & USART_ISR_TXE)){}
+            USART2->TDR = character;
+            break;
+    }
+  }
 }
 
 void SystemClock_Config(void) {

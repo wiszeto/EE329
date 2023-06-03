@@ -1,0 +1,45 @@
+/*
+ *      Author: Luis D. Garcia and Nilay Patel
+ *      Description: UART Library Implementation File that contains
+ *      			 the functions for interfacing with STM32L476RG.
+ *      			 The main functions are UART_init to setup the pins,
+ *      			 UART_print to print out the user's strings. Lastly,
+ *      			 there is UART_recieve to accept user input.
+*/
+
+
+#include "uart.h"
+#include "stm32l4xx_hal.h"
+#include "stdint.h"
+
+void UART_init(void)
+{
+	// Enable GPIOA and USART2 clocks
+	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
+	RCC->APB1ENR1 |= RCC_APB1ENR1_USART2EN;
+	GPIOA->MODER &= ~(GPIO_MODER_MODE2 | GPIO_MODER_MODE3); //clear bits
+	GPIOA->MODER |= (GPIO_MODER_MODE2_1 | GPIO_MODER_MODE3_1);
+	GPIOA->AFR[0] &= ~((0x000F << GPIO_AFRL_AFSEL2_Pos) | (0x000F << GPIO_AFRL_AFSEL3_Pos));
+	GPIOG->AFR[0] |= ((0x0007 << GPIO_AFRL_AFSEL2_Pos) | (0x0007 << GPIO_AFRL_AFSEL3_Pos));
+
+	// Configure USART2 for 115200 baud, 8-bit data, no parity, 1 stop bit
+    USART2->BRR = 106666;
+    USART2->CR1 |= USART_CR1_TE | USART_CR1_RE;
+    USART2->CR1 |= USART_CR1_UE; //enable UART
+
+}
+
+void UART_print(const uint8_t * str)
+{
+	while (*str)
+	{
+		while (!(USART2->ISR & USART_ISR_TXE));
+		USART2->TDR = (*str++);
+	}
+}
+
+uint8_t UART_receive(void)
+{
+	while (!(USART2->ISR & USART_ISR_RXNE_Msk));
+	return USART2->RDR;
+}

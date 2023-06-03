@@ -21,6 +21,7 @@
 #include "main.h"
 #include "uart.h"
 
+
 void LPUART_init() {
 	PWR->CR2 |= (PWR_CR2_IOSV);             // power avail on PG[15:2] (LPUART1)
 	RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOGEN);   // enable GPIOG clock
@@ -49,8 +50,36 @@ void LPUART_init() {
 	LPUART1->BRR = 106666;
 	NVIC->ISER[2] = (1 << (LPUART1_IRQn & 0x1F));   // enable LPUART1 ISR
 	__enable_irq();                          // enable global interrupts
-
 }
+
+void USART_init() {
+    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN; // enable GPIOA clock
+    RCC->APB1ENR1 |= RCC_APB1ENR1_USART2EN; // enable USART2 clock
+
+    GPIOA->MODER &= ~(GPIO_MODER_MODE0 |GPIO_MODER_MODE1 |GPIO_MODER_MODE2 | GPIO_MODER_MODE3); //clear bits
+    	GPIOA->MODER |= (GPIO_MODER_MODE0_1 |GPIO_MODER_MODE1_1 |GPIO_MODER_MODE2_1 | GPIO_MODER_MODE3_1);
+    	GPIOA->AFR[0] &= ~((0x000F << GPIO_AFRL_AFSEL0_Pos) |(0x000F << GPIO_AFRL_AFSEL1_Pos) |(0x000F << GPIO_AFRL_AFSEL2_Pos) | (0x000F << GPIO_AFRL_AFSEL3_Pos));
+    	GPIOA->AFR[0] |= ((0x0007 << GPIO_AFRL_AFSEL0_Pos) |(0x0007 << GPIO_AFRL_AFSEL1_Pos) |(0x0007 << GPIO_AFRL_AFSEL2_Pos) | (0x0007 << GPIO_AFRL_AFSEL3_Pos));
+
+
+    USART2->CR1 &= ~(USART_CR1_M1 | USART_CR1_M0); // 8-bit data
+    USART2->CR1 |= USART_CR1_UE;                   // enable USART2
+    USART2->CR1 |= (USART_CR1_TE | USART_CR1_RE);  // enable xmit & recv
+    USART2->CR1 |= USART_CR1_RXNEIE;        // enable USART2 recv interrupt
+    USART2->ISR &= ~(USART_ISR_RXNE);       // clear Recv-Not-Empty flag
+    USART2->BRR = 34;                   // Set the correct baud rate
+    NVIC->ISER[0] = (1 << (USART2_IRQn & 0x1F));   // enable USART2 ISR
+    __enable_irq();                          // enable global interrupts
+}
+
+void USART_print(char *c){
+    uint8_t i;
+    for (i = 0; c[i] != '\0'; i++){
+        while (!(USART2->ISR & USART_ISR_TXE)){}
+        USART2->TDR = c[i];
+    }
+}
+
 
 void LPUART_Print_Char(char ch) {
 	while (!(LPUART1->ISR & USART_ISR_TXE))
