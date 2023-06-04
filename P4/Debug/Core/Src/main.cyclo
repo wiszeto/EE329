@@ -1,4 +1,4 @@
-main.c:12:5:main	1
+main.c:12:5:main	4
 main.c:55:6:LPUART1_IRQHandler	4
 main.c:77:6:USART2_IRQHandler	3
 main.c:90:6:SystemClock_Config	4

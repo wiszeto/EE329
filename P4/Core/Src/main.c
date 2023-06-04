@@ -27,27 +27,27 @@ int main(void) {
 
 	delay_us(100);
 	USART_init();
-	USART_print("Hello");
+	USART_print("Hello\n");
 	while (1) {
 //		USART_print("Hello");
-//		if (flag) {
-//			delay_us(10000);
-//			flag = 0;
-//			str_write("Welcome ");
-//			str_write(buffer);  // process the string
-//
-//			lcd_set_cursor_position(1, 0); // set cursor to second row, first column
-//			str_write("Put fngr on sens");
-//			lcd_set_cursor_position(0, 0); // set cursor to second row, first column
-//		}
-//		if (GPIOC->IDR & GPIO_IDR_ID13) { // Check if the button is pressed
-//			GPIOB->BSRR = GPIO_PIN_7;
-//			delay_us(10000);
-//			while (!(LPUART1->ISR & USART_ISR_TXE));
-//			LPUART_Print("WILSON\n");
-//			delay_us(1000000);
-//		}
-//		GPIOB->BRR = GPIO_PIN_7;
+		if (flag) {
+			delay_us(10000);
+			flag = 0;
+			str_write("Welcome ");
+			str_write(buffer);  // process the string
+
+			lcd_set_cursor_position(1, 0); // set cursor to second row, first column
+			str_write("Put fngr on sens");
+			lcd_set_cursor_position(0, 0); // set cursor to second row, first column
+		}
+		if (GPIOC->IDR & GPIO_IDR_ID13) { // Check if the button is pressed
+			GPIOB->BSRR = GPIO_PIN_7;
+			delay_us(10000);
+			while (!(LPUART1->ISR & USART_ISR_TXE));
+			LPUART_Print("Wilson\n");
+			delay_us(1000000);
+		}
+		GPIOB->BRR = GPIO_PIN_7;
 
 	}
 }
