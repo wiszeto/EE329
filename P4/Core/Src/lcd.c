@@ -27,37 +27,38 @@
 #include "lcd.h"
 
 //prototypes
-void LCD_init(void);
-void Nybble();
-void command(uint8_t command);
-void write(char letter);
-void lcd_set_cursor_position(uint8_t row, uint8_t col);
-int LCD_convert_ascii_to_time ( uint8_t asctime );
+//void LCD_init(void);
+//void Nybble();
+//void command(uint8_t command);
+//void write(char letter);
+//void lcd_set_cursor_position(uint8_t row, uint8_t col);
+//int LCD_convert_ascii_to_time ( uint8_t asctime );
+//void clear_LCD(void);
 
 //data bus array
 uint16_t GPIO_Pin[] = {D4, D5, D6, D7};
 
 void LCD_init(void) {
   delay_us(100000);
-  RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOAEN); // enable GPIOA clock on bus
+  RCC->AHB2ENR |= (RCC_AHB2ENR_GPIOEEN); // enable GPIOA clock on bus
 
   // Making control pins output mode bits(01)
   control_pins->MODER &=
-      ~(GPIO_MODER_MODE1 | GPIO_MODER_MODE2 | GPIO_MODER_MODE3 |
-        GPIO_MODER_MODE4 | GPIO_MODER_MODE5 | GPIO_MODER_MODE6 |
-        GPIO_MODER_MODE7); // clear bits for PA
+      ~(GPIO_MODER_MODE9 | GPIO_MODER_MODE10 | GPIO_MODER_MODE11 |
+        GPIO_MODER_MODE12 | GPIO_MODER_MODE13 | GPIO_MODER_MODE14 |
+        GPIO_MODER_MODE15); // clear bits for PA
   control_pins->MODER |=
-      (GPIO_MODER_MODE1_0 | GPIO_MODER_MODE2_0 | GPIO_MODER_MODE3_0 |
-       GPIO_MODER_MODE4_0 | GPIO_MODER_MODE5_0 | GPIO_MODER_MODE6_0 |
-       GPIO_MODER_MODE7_0); // set up DB4 to DB7, RS, RW, E as outputs
+      (GPIO_MODER_MODE9_0 | GPIO_MODER_MODE10_0 | GPIO_MODER_MODE11_0 |
+       GPIO_MODER_MODE12_0 | GPIO_MODER_MODE13_0 | GPIO_MODER_MODE14_0 |
+       GPIO_MODER_MODE15_0); // set up DB4 to DB7, RS, RW, E as outputs
   control_pins->OTYPER &=
-      ~(GPIO_OTYPER_OT1 | GPIO_OTYPER_OT2 | GPIO_OTYPER_OT3 | GPIO_OTYPER_OT4 |
-        GPIO_OTYPER_OT5 | GPIO_OTYPER_OT6 | GPIO_OTYPER_OT7);
+      ~(GPIO_OTYPER_OT9 | GPIO_OTYPER_OT10 | GPIO_OTYPER_OT11 | GPIO_OTYPER_OT12 |
+        GPIO_OTYPER_OT13 | GPIO_OTYPER_OT14 | GPIO_OTYPER_OT15);
   control_pins->OSPEEDR |=
-      ((3 << GPIO_OSPEEDR_OSPEED1_Pos) | (3 << GPIO_OSPEEDR_OSPEED2_Pos) |
-       (3 << GPIO_OSPEEDR_OSPEED3_Pos) | (3 << GPIO_OSPEEDR_OSPEED4_Pos) |
-       (3 << GPIO_OSPEEDR_OSPEED5_Pos) | (3 << GPIO_OSPEEDR_OSPEED6_Pos) |
-       (3 << GPIO_OSPEEDR_OSPEED7_Pos));
+      ((3 << GPIO_OSPEEDR_OSPEED9_Pos) | (3 << GPIO_OSPEEDR_OSPEED10_Pos) |
+       (3 << GPIO_OSPEEDR_OSPEED11_Pos) | (3 << GPIO_OSPEEDR_OSPEED12_Pos) |
+       (3 << GPIO_OSPEEDR_OSPEED13_Pos) | (3 << GPIO_OSPEEDR_OSPEED14_Pos) |
+       (3 << GPIO_OSPEEDR_OSPEED15_Pos));
   control_pins->BRR =
       (D4 | D5 | D6 | D7 | EN | RW | RS); // Initializes data to all 0
 
@@ -225,3 +226,11 @@ int LCD_convert_ascii_to_time ( uint8_t asctime ){
 	return (0x0F & asctime);
 }
 
+void clear_LCD(void) {
+	lcd_set_cursor_position(0, 0);
+	str_write("                ");
+	delay_us(100);
+	lcd_set_cursor_position(1, 0);
+	str_write("                ");
+	delay_us(100);
+}

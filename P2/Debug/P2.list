@@ -1932,9 +1932,9 @@ void SystemInit(void)
  8000d64:	e000ed00 	.word	0xe000ed00
 
 08000d68 <wave>:
+ * @param polarity    For sawtooth wave, 1 for regular, 0 for inverted.
  * @param num_points  Number of points in the waveform.
  *
- * @return void
  */
 uint32_t wave(uint32_t wave_type, uint32_t offset, uint32_t duty_cycle, uint32_t polarity,
 		uint32_t num_points) {

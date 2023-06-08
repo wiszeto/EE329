@@ -1,24 +1,21 @@
-09:49:04 **** Incremental Build of configuration Debug for project P4 ****
+21:29:45 **** Incremental Build of configuration Debug for project P4 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:36:4: warning: implicit declaration of function 'str_write' [-Wimplicit-function-declaration]
-   36 |    str_write("Welcome ");
-      |    ^~~~~~~~~
-../Core/Src/main.c:39:4: warning: implicit declaration of function 'lcd_set_cursor_position' [-Wimplicit-function-declaration]
-   39 |    lcd_set_cursor_position(1, 0); // set cursor to second row, first column
-      |    ^~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+../Core/Src/FP_process.c: In function 'FP_search':
+../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
+  192 | }
+      | ^
 arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: P4.elf
  
 arm-none-eabi-size   P4.elf 
 arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
    text	   data	    bss	    dec	    hex	filename
-   6924	     28	   1836	   8788	   2254	P4.elf
+   9644	     28	   2692	  12364	   304c	P4.elf
 Finished building: default.size.stdout
  
 Finished building: P4.list
  
 
-09:49:04 Build Finished. 0 errors, 2 warnings. (took 670ms)
+21:29:45 Build Finished. 0 errors, 1 warnings. (took 608ms)
 
