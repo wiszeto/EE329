@@ -22,10 +22,6 @@
 uint32_t ACK_LENGTH = 0; //global variable
 #define CMD_DELAY 800000 //delay length to call for each command length
 
-
-void FP_init(void) {
-}
-
 //--------------------Instructions to transmit
 //Command to confirm if fingerprint is connected to upper computer
 void handshake(void) {

@@ -7,6 +7,7 @@
 
 void SystemClock_Config(void);
 void FingerprintErrorHandler(void);
+void LPUART_FPID();
 
 #define BUFFER_SIZE 256
 //static char buffer[BUFFER_SIZE];
@@ -27,9 +28,9 @@ uint8_t discordbuffer[BUFFER_SIZE];
 
 int flag = 0;
 int EN_Flag = 0;
-int FPIDrdy = 0;
-int AT_Flag = 0;
-
+int FPIDrdy = 0;	//
+int AT_Flag = 0;	//flag for attendance
+int EX_Flag = 0;	//flag for exporting data
 
 int main(void) {
 
@@ -56,7 +57,7 @@ int main(void) {
 
 	//FOR DEBUGGING
 	empty(); //empties entire database of FP
-	MEM_GLOBAL = 0;//resets pointer
+	MEM_GLOBAL = 0; //resets pointer
 
 	while (1) {
 		if (EN_Flag) {
@@ -65,19 +66,32 @@ int main(void) {
 			EN_Flag = 0;
 		}
 
-
 		//need to make 2 other parameters; start and tardy time
-		while (AT_Flag){ //keep asking for user inputs until time is reached
+		while (AT_Flag) { //keep asking for user inputs until time is reached change to while so i can debug
 			FP_search();
+			delay_us(10000000);	//Delay to see success message on screen
+			LPUART_FPID();		//
 		}
+
+		if (EX_Flag) {
+			GPIOB->BSRR = GPIO_PIN_7;
+			uint32_t exportIndex = 0;
+			while (exportIndex < MEM_GLOBAL) { //sends data from lowest byte to highest byte
+				LPUART_FPID(); //transmits ID to LPUART
+				for (int z = 0; z < 16; z ++){
+					while (!(LPUART1->ISR & USART_ISR_TXE))
+															;
+					LPUART1->TDR = USER_INPUT_NAME[exportIndex][z];
+				}
+				exportIndex++;	//increments array
+			}
+			EX_Flag = 0;
+		}
+
 //		delay_us(100000);
 //		GPIOB->BRR = GPIO_PIN_7;
 
-
-
-
-
-		//-----------------DEBUGGING CODE
+			//-----------------DEBUGGING CODE
 //		lcd_set_cursor_position(0, 0); // set cursor to second row, first column
 //		write(index0 + '0');
 
@@ -121,56 +135,69 @@ int main(void) {
 //		}
 //		GPIOB->BRR = GPIO_PIN_7;
 
+		}
 	}
-}
 
 //Donna Updated need to test
-void LPUART1_IRQHandler(void) {
-	if (LPUART1->ISR & USART_ISR_RXNE) { // check if there is new data in the UART receiver
-		uint8_t charRecv = LPUART1->RDR;       // read the received character
-		discordbuffer[index] = charRecv;      //buffer must be global variable
+	void LPUART1_IRQHandler(void) {
+		if (LPUART1->ISR & USART_ISR_RXNE) { // check if there is new data in the UART receiver
+			uint8_t charRecv = LPUART1->RDR;      // read the received character
+			discordbuffer[index] = charRecv;    //buffer must be global variable
 //		USER_INPUT_NAME[MAX_FP][index] = charRecv;
-		index++;                              //index must be global variable
+			index++;                             //index must be global variable
 
-		if (index == 2) {
-			if (discordbuffer[0] == 0xEF && discordbuffer[1] == 0x02) { //wilson send 0xEF02 to indicate beginning of enrollment
+			if (index == 2) {
+				if (discordbuffer[0] == 0xEF && discordbuffer[1] == 0x02) { //wilson send 0xEF02 to indicate beginning of enrollment
 				//for each username (16 characters long max for LCD) load it into this variable -> USER_INPUT_NAME[MAX_FP][16];
-				EN_Flag = 1;
-				AT_Flag = 0;
-				index = 0;
+					EN_Flag = 1;
+					AT_Flag = 0;
+					index = 0;
+
+				}
+				if (discordbuffer[0] == 0xEF && discordbuffer[1] == 0x03) { //wilson send 0xEF03 to indicate beginning of attendance?
+					EN_Flag = 0;
+					AT_Flag = 1;
+					index = 0;
+				}
+				if (discordbuffer[0] == 0xEF && discordbuffer[1] == 0x04) { //wilson send 0xEF04 to indicate beginning of attendance?
+					EN_Flag = 0;
+					AT_Flag = 0;
+					EX_Flag = 1;
+					index = 0;
+				}
 
 			}
-			if (discordbuffer[0] == 0xEF && discordbuffer[1] == 0x03) { //wilson send 0xEF03 to indicate beginning of attendance?
-				AT_Flag = 1;
+			if (charRecv == '\n') { //replace python null terminator with C null terminator
+//				GPIOB->BSRR = GPIO_PIN_7;
+				flag = 1;
+				index--;
+				discordbuffer[index] = '\0'; //place user name string into buffer to be written to LCD
+//			USER_INPUT_NAME[MAX_FP][index] = '\0';
+				for (int i = 0; i < 16; i++) {
+					USER_INPUT_NAME[MEM_GLOBAL][i] = discordbuffer[i];
+				}
 				index = 0;
 			}
-		}
-		if (charRecv == '\n') { //replace python null terminator with C null terminator
-			GPIOB->BSRR = GPIO_PIN_7;
-			flag = 1;
-			index--;
-			discordbuffer[index] = '\0'; //place user name string into buffer to be written to LCD
-//			USER_INPUT_NAME[MAX_FP][index] = '\0';
-			for (int i = 0; i < 16; i++)
-				USER_INPUT_NAME[MEM_GLOBAL][i] = discordbuffer[i];
-			index = 0;
-		}
 //		while (!(LPUART1->ISR & USART_ISR_TXE))
 //			;  // wait for empty TX buffer
 //		LPUART1->TDR = charRecv; // send received character
 //		while (!(LPUART1->ISR & USART_ISR_TXE))
 //			;  // wait for empty TX buffer
 //		LPUART1->TDR = index; // send received character
+		}
 	}
-}
 
-void LPUART_FPID() {			//send fingerprint ID to discord for processing
-	while (!(LPUART1->ISR & USART_ISR_TXE))
-		;
-	if (FPIDrdy == 1) {
-		FP_ID = LPUART1->TDR;     // sent wilson fingerprint ID
+//file IO shit to export data
+	void LPUART_FPID() {		//send fingerprint ID to discord for processing
+		while (!(LPUART1->ISR & USART_ISR_TXE))
+			;
+		if (FPIDrdy == 1) {
+			LPUART_Print("SendID");	  //header instruction
+			LPUART_Print(FP_ID);
+			LPUART_Print("\n");
+			FPIDrdy = 0;	//resets flag
+		}
 	}
-}
 
 //OG LPUART WORKING
 //void LPUART1_IRQHandler(void) {
@@ -195,20 +222,20 @@ void LPUART_FPID() {			//send fingerprint ID to discord for processing
 //	}
 //}
 
-void USART2_IRQHandler(void) { //[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27]
+	void USART2_IRQHandler(void) { //[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27]
 //	GPIOB->BSRR = GPIO_PIN_7;
-	if (USART2->ISR & USART_ISR_RXNE) { // check if there is new data in the UART receiver
-		uint8_t charRecv = USART2->RDR;    // read the received character
-		errorbuffer[index0] = charRecv; //buffer must be global variable
-		index0++;                  //index must be global variable
-		if (index0 >= ACK_LENGTH) {
-			ConfirmationCode = errorbuffer[9];    //must be global variable
+		if (USART2->ISR & USART_ISR_RXNE) { // check if there is new data in the UART receiver
+			uint8_t charRecv = USART2->RDR;    // read the received character
+			errorbuffer[index0] = charRecv; //buffer must be global variable
+			index0++;                  //index must be global variable
+			if (index0 >= ACK_LENGTH) {
+				ConfirmationCode = errorbuffer[9];    //must be global variable
 //			FingerprintErrorHandler();
 //			errorbuffer[1+index0] = '\n';
-			index0 = 0;
+				index0 = 0;
+			}
 		}
 	}
-}
 
 //FOR DEBUGGING
 //void FingerprintErrorHandler(void) {
@@ -270,43 +297,44 @@ void USART2_IRQHandler(void) { //[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
 //	}
 //}
 
-void SystemClock_Config(void) {
-	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
+	void SystemClock_Config(void) {
+		RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+		RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
-	if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1)
-			!= HAL_OK) {
-		Error_Handler();
+		if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1)
+				!= HAL_OK) {
+			Error_Handler();
+		}
+
+		RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+		RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+		RCC_OscInitStruct.MSICalibrationValue = 0;
+		RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+		RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+		if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+			Error_Handler();
+		}
+
+		RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+				| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+		RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+		RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+		RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+		RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+		if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0)
+				!= HAL_OK) {
+			Error_Handler();
+		}
 	}
 
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
-	RCC_OscInitStruct.MSIState = RCC_MSI_ON;
-	RCC_OscInitStruct.MSICalibrationValue = 0;
-	RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-		Error_Handler();
+	void Error_Handler(void) {
+
+		__disable_irq();
+		while (1) {
+		}
+
 	}
-
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
-			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK) {
-		Error_Handler();
-	}
-}
-
-void Error_Handler(void) {
-
-	__disable_irq();
-	while (1) {
-	}
-
-}
 
 #ifdef  USE_FULL_ASSERT
 

@@ -14,7 +14,7 @@
 //global variables
 uint8_t MEM_GLOBAL;	//FP ID# LOCATION IN FLASH MEMORY
 uint16_t FP_ID; //FOUND FP ID# LOCATION IN FLASH MEMORY
-char USER_INPUT_NAME[MAX_FP][16];//MAX_FP = max # of users; username 16 char max
+char USER_INPUT_NAME[MAX_FP][16]; //MAX_FP = max # of users; username 16 char max
 
 //checks if FP is connected and communicating properly
 //does not properly find it will need to look at bytes when it is not being sent proper
@@ -107,7 +107,7 @@ void FP_enroll(void) {
 		lcd_set_cursor_position(1, 0);
 
 //		prints username onto LCD	//
-		for (int i = 0; i < 16; i++){
+		for (int i = 0; i < 16; i++) {
 			write(USER_INPUT_NAME[MEM_GLOBAL][i]); //NEED TO VERIFY IF IT WORKS
 		}
 
@@ -139,7 +139,7 @@ void FP_enroll(void) {
 
 //Searches through data base by asking for user input.
 //Returns address found or -1 if error
-int FP_search(void) {
+void FP_search(void) {
 	//FPIDrdy = 0;
 	lcd_set_cursor_position(0, 0);
 	str_write("Place Finger    ");
@@ -162,18 +162,22 @@ int FP_search(void) {
 	Img2Tz(1);	//stores in buffer 1
 
 	lcd_set_cursor_position(0, 0);
-	str_write("Searching Database");
+	str_write("Searching       ");
 	lcd_set_cursor_position(1, 0);
-	str_write("        PageID = ");
-	write(MAX_FP + '0');
+	str_write("Database        ");
+//	write(MAX_FP + '0');	//for debugging
 	search(1, 0, MAX_FP);	//searches through entire database
 	if (ConfirmationCode == 0x00) {	//successfully found ID
+		FP_ID = errorbuffer[10] + errorbuffer[11]; //gets pageID = location of FP stored in FLASH
 		lcd_set_cursor_position(0, 0);
-		str_write("Found FP at     ");
+		str_write("Welcome Back gmr");
 		lcd_set_cursor_position(1, 0);
-		str_write("      PageID = ");
-		FP_ID = errorbuffer[10] + errorbuffer[11];//gets pageID = location of FP stored in FLASH
-		write(FP_ID + '0');
+
+		//prints username onto LCD	//
+		for (int i = 0; i < 16; i++) {
+			write(USER_INPUT_NAME[FP_ID][i]); //NEED TO VERIFY IF IT WORKS
+		}
+//		write(FP_ID + '0'); for debugging
 		FPIDrdy = 1;
 		//return FP_ID;
 	} else if (ConfirmationCode == 0x01) {

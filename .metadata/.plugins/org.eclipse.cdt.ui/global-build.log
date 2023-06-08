@@ -1,93 +1,8 @@
-21:04:46 **** Incremental Build of configuration Debug for project P4 ****
+22:46:23 **** Incremental Build of configuration Debug for project P4 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
-../Core/Src/FP_process.c: In function 'FP_search':
-../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
-  192 | }
-      | ^
-arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: P4.elf
- 
-arm-none-eabi-size   P4.elf 
-arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
-   text	   data	    bss	    dec	    hex	filename
-   9640	     28	   2692	  12360	   3048	P4.elf
-Finished building: default.size.stdout
- 
-Finished building: P4.list
- 
-21:04:57 **** Incremental Build of configuration Debug for project P4 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
-../Core/Src/FP_process.c: In function 'FP_enroll':
-../Core/Src/FP_process.c:109:3: error: unknown type name 'prints'
-  109 |   prints username onto LCD //
-      |   ^~~~~~
-../Core/Src/FP_process.c:109:19: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'onto'
-  109 |   prints username onto LCD //
-      |                   ^~~~
-../Core/Src/FP_process.c:110:19: error: 'i' undeclared (first use in this function)
-  110 |   for (int i = 0; i < 16; i++){
-      |                   ^
-../Core/Src/FP_process.c:110:19: note: each undeclared identifier is reported only once for each function it appears in
-../Core/Src/FP_process.c:110:30: error: expected ';' before ')' token
-  110 |   for (int i = 0; i < 16; i++){
-      |                              ^
-      |                              ;
-../Core/Src/FP_process.c:110:30: error: expected statement before ')' token
-../Core/Src/FP_process.c: In function 'FP_search':
-../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
-  192 | }
-      | ^
-make: *** [Core/Src/subdir.mk:49: Core/Src/FP_process.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-21:05:06 **** Incremental Build of configuration Debug for project P4 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
-../Core/Src/FP_process.c: In function 'FP_search':
-../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
-  192 | }
-      | ^
-arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: P4.elf
- 
-arm-none-eabi-size   P4.elf 
-arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
-   text	   data	    bss	    dec	    hex	filename
-   9684	     28	   2692	  12404	   3074	P4.elf
-Finished building: default.size.stdout
- 
-Finished building: P4.list
- 
-21:05:30 **** Incremental Build of configuration Debug for project P4 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
-../Core/Src/FP_process.c: In function 'FP_search':
-../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
-  192 | }
-      | ^
-arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: P4.elf
- 
-arm-none-eabi-size   P4.elf 
-arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
-   text	   data	    bss	    dec	    hex	filename
-   9684	     28	   2692	  12404	   3074	P4.elf
-Finished building: default.size.stdout
- 
-Finished building: P4.list
- 
-21:20:20 **** Incremental Build of configuration Debug for project P4 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
-arm-none-eabi-gcc "../Core/Src/fingerprint.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/fingerprint.d" -MT"Core/Src/fingerprint.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fingerprint.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/FP_process.c: In function 'FP_search':
-../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
-  192 | }
-      | ^
-../Core/Src/main.c:25:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
-   25 | int index = 0;
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
       |     ^~~~~
 arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: P4.elf
@@ -95,59 +10,34 @@ Finished building target: P4.elf
 arm-none-eabi-size   P4.elf 
 arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
    text	   data	    bss	    dec	    hex	filename
-   9716	     28	   2692	  12436	   3094	P4.elf
+  10024	     28	   2692	  12744	   31c8	P4.elf
 Finished building: default.size.stdout
  
 Finished building: P4.list
  
-21:26:33 **** Incremental Build of configuration Debug for project P4 ****
+22:47:09 **** Incremental Build of configuration Debug for project P4 ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:25:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
-   25 | int index = 0;
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
       |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:196:17: warning: passing argument 1 of 'LPUART_Print' makes pointer from integer without a cast [-Wint-conversion]
+  196 |    LPUART_Print(FP_ID);
+      |                 ^~~~~
+      |                 |
+      |                 uint16_t {aka short unsigned int}
+In file included from ../Core/Src/main.c:2:
+../Core/Inc/uart.h:6:31: note: expected 'const char *' but argument is of type 'uint16_t' {aka 'short unsigned int'}
+    6 | void LPUART_Print(const char *message);
+      |                   ~~~~~~~~~~~~^~~~~~~
 arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: P4.elf
  
 arm-none-eabi-size   P4.elf 
 arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
    text	   data	    bss	    dec	    hex	filename
-   9740	     28	   2692	  12460	   30ac	P4.elf
-Finished building: default.size.stdout
- 
-Finished building: P4.list
- 
-21:27:43 **** Incremental Build of configuration Debug for project P4 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:25:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
-   25 | int index = 0;
-      |     ^~~~~
-arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: P4.elf
- 
-arm-none-eabi-size   P4.elf 
-arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
-   text	   data	    bss	    dec	    hex	filename
-   9704	     28	   2692	  12424	   3088	P4.elf
-Finished building: default.size.stdout
- 
-Finished building: P4.list
- 
-21:29:45 **** Incremental Build of configuration Debug for project P4 ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
-../Core/Src/FP_process.c: In function 'FP_search':
-../Core/Src/FP_process.c:192:1: warning: control reaches end of non-void function [-Wreturn-type]
-  192 | }
-      | ^
-arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: P4.elf
- 
-arm-none-eabi-size   P4.elf 
-arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
-   text	   data	    bss	    dec	    hex	filename
-   9644	     28	   2692	  12364	   304c	P4.elf
+  10008	     28	   2692	  12728	   31b8	P4.elf
 Finished building: default.size.stdout
  
 Finished building: P4.list

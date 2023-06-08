@@ -12,7 +12,7 @@
 
 //function declarations
 void FP_enroll(void);
-int FP_search(void);
+void FP_search(void);
 void FP_check(void);
 
 //global variable
