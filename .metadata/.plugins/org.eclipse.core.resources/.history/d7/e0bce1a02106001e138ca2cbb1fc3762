@@ -14,7 +14,6 @@
 void FP_enroll(void);
 void FP_search(void);
 void FP_check(void);
-void itoa(uint16_t num, char* str);
 
 //global variable
 extern uint8_t MEM_GLOBAL;	//FP ID# LOCALATION IN FLASH MEMORY

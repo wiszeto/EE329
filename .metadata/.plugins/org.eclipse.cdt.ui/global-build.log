@@ -42,3 +42,225 @@ Finished building: default.size.stdout
  
 Finished building: P4.list
  
+10:03:51 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:197:17: warning: passing argument 1 of 'LPUART_Print' makes pointer from integer without a cast [-Wint-conversion]
+  197 |    LPUART_Print(FP_ID);
+      |                 ^~~~~
+      |                 |
+      |                 uint16_t {aka short unsigned int}
+In file included from ../Core/Src/main.c:2:
+../Core/Inc/uart.h:6:31: note: expected 'const char *' but argument is of type 'uint16_t' {aka 'short unsigned int'}
+    6 | void LPUART_Print(const char *message);
+      |                   ~~~~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10028	     28	   2692	  12748	   31cc	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:11:31 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10036	     28	   2692	  12756	   31d4	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:18:47 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10032	     28	   2692	  12752	   31d0	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:20:35 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10032	     32	   2696	  12760	   31d8	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:28:05 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10228	     32	   2696	  12956	   329c	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:31:55 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10216	     32	   2696	  12944	   3290	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:36:14 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:200:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  200 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10256	     32	   2696	  12984	   32b8	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:51:27 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:196:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  196 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+../Core/Src/FP_process.c: In function 'FP_search':
+../Core/Src/FP_process.c:202:3: warning: implicit declaration of function 'LPUART_Print' [-Wimplicit-function-declaration]
+  202 |   LPUART_Print("Send");   //header instruction
+      |   ^~~~~~~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10276	     32	   2696	  13004	   32cc	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+10:53:57 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-size   P4.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10276	     32	   2696	  13004	   32cc	P4.elf
+Finished building: default.size.stdout
+ 
+11:05:39 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+../Core/Src/FP_process.c: In function 'FP_search':
+../Core/Src/FP_process.c:202:3: warning: implicit declaration of function 'LPUART_Print' [-Wimplicit-function-declaration]
+  202 |   LPUART_Print("Send");   //header instruction
+      |   ^~~~~~~~~~~~
+../Core/Src/FP_process.c:205:3: warning: implicit declaration of function 'LPUART_Print_Char' [-Wimplicit-function-declaration]
+  205 |   LPUART_Print_Char('\n');
+      |   ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10260	     32	   2696	  12988	   32bc	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+11:07:58 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+../Core/Src/FP_process.c: In function 'FP_search':
+../Core/Src/FP_process.c:191:3: warning: implicit declaration of function 'LPUART_Print' [-Wimplicit-function-declaration]
+  191 |   LPUART_Print("Send");   //header instruction
+      |   ^~~~~~~~~~~~
+../Core/Src/FP_process.c:194:3: warning: implicit declaration of function 'LPUART_Print_Char' [-Wimplicit-function-declaration]
+  194 |   LPUART_Print_Char('\n');
+      |   ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10240	     32	   2696	  12968	   32a8	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+11:08:38 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+../Core/Src/FP_process.c: In function 'FP_search':
+../Core/Src/FP_process.c:191:3: warning: implicit declaration of function 'LPUART_Print' [-Wimplicit-function-declaration]
+  191 |   LPUART_Print("Send");   //header instruction
+      |   ^~~~~~~~~~~~
+../Core/Src/FP_process.c:197:3: warning: implicit declaration of function 'LPUART_Print_Char' [-Wimplicit-function-declaration]
+  197 |   LPUART_Print_Char('\n');
+      |   ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10264	     32	   2696	  12992	   32c0	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 

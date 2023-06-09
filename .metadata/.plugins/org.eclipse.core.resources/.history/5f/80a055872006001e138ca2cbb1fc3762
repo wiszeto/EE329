@@ -69,6 +69,8 @@ int main(void) {
 		//need to make 2 other parameters; start and tardy time
 		while (AT_Flag) { //keep asking for user inputs until time is reached change to while so i can debug
 			FP_search();
+			delay_us(10000000);	//Delay to see success message on screen
+			LPUART_FPID();		//
 		}
 
 		if (EX_Flag) {
@@ -188,12 +190,11 @@ int main(void) {
 
 //file IO shit to export data
 	void LPUART_FPID() {		//send fingerprint ID to discord for processing
+		while (!(LPUART1->ISR & USART_ISR_TXE))
+			;
 		if (FPIDrdy == 1) {
-			char FP_ID_string[16]; // 15 digits + null character
-			itoa(FP_ID, FP_ID_string); // Convert the uint16_t to a string
-
-			LPUART_Print("Send");	  //header instruction
-			LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+			LPUART_Print("SendID");	  //header instruction
+			LPUART_Print(FP_ID);
 			LPUART_Print("\n");
 			FPIDrdy = 0;	//resets flag
 		}

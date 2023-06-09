@@ -13,7 +13,7 @@
 
 //global variables
 uint8_t MEM_GLOBAL;	//FP ID# LOCATION IN FLASH MEMORY
-uint16_t FP_ID = 1234; //FOUND FP ID# LOCATION IN FLASH MEMORY
+uint16_t FP_ID; //FOUND FP ID# LOCATION IN FLASH MEMORY
 char USER_INPUT_NAME[MAX_FP][16]; //MAX_FP = max # of users; username 16 char max
 
 //checks if FP is connected and communicating properly
@@ -137,24 +137,6 @@ void FP_enroll(void) {
 //	write(section_num + '0');
 
 }
-void itoa(uint16_t num, char* str)
-{
-    int i = 0;
-    while(num != 0)
-    {
-        str[i++] = '0' + (num % 10);
-        num /= 10;
-    }
-    str[i] = '\0';
-
-    // Reverse the string
-    for(int j = 0, k = i - 1; j < k; j++, k--)
-    {
-        char temp = str[j];
-        str[j] = str[k];
-        str[k] = temp;
-    }
-}
 
 //Searches through data base by asking for user input.
 //Returns address found or -1 if error
@@ -188,13 +170,6 @@ void FP_search(void) {
 	search(1, 0, MAX_FP);	//searches through entire database
 	if (ConfirmationCode == 0x00) {	//successfully found ID
 		FP_ID = errorbuffer[10] + errorbuffer[11]; //gets pageID = location of FP stored in FLASH
-		LPUART_Print("Send");	  //header instruction
-		delay_us(10000);
-		LPUART1->TDR = errorbuffer[10];
-		delay_us(10000);
-		LPUART1->TDR = errorbuffer[11];
-		delay_us(10000);
-		LPUART_Print_Char('\n');
 		lcd_set_cursor_position(0, 0);
 		str_write("Welcome Back!   ");
 		lcd_set_cursor_position(1, 0);
@@ -203,11 +178,9 @@ void FP_search(void) {
 		for (int i = 0; i < 16; i++) {
 			write(USER_INPUT_NAME[FP_ID][i]); //NEED TO VERIFY IF IT WORKS
 		}
-
-//		LPUART_Print("Send");	  //header instruction
-//		LPUART1->TDR = errorbuffer[10];
-//		LPUART1->TDR = errorbuffer[11];
-//		LPUART_Print_Char('\n');
+//		write(FP_ID + '0'); for debugging
+		FPIDrdy = 1;
+		//return FP_ID;
 	} else if (ConfirmationCode == 0x01) {
 		lcd_set_cursor_position(0, 0);
 		str_write("Error During    ");

@@ -187,14 +187,7 @@ void FP_search(void) {
 //	write(MAX_FP + '0');	//for debugging
 	search(1, 0, MAX_FP);	//searches through entire database
 	if (ConfirmationCode == 0x00) {	//successfully found ID
-		FP_ID = errorbuffer[10] + errorbuffer[11]; //gets pageID = location of FP stored in FLASH
-		LPUART_Print("Send");	  //header instruction
-		delay_us(10000);
-		LPUART1->TDR = errorbuffer[10];
-		delay_us(10000);
-		LPUART1->TDR = errorbuffer[11];
-		delay_us(10000);
-		LPUART_Print_Char('\n');
+		FP_ID = errorbuffer[10] ; //gets pageID = location of FP stored in FLASH
 		lcd_set_cursor_position(0, 0);
 		str_write("Welcome Back!   ");
 		lcd_set_cursor_position(1, 0);
@@ -203,11 +196,9 @@ void FP_search(void) {
 		for (int i = 0; i < 16; i++) {
 			write(USER_INPUT_NAME[FP_ID][i]); //NEED TO VERIFY IF IT WORKS
 		}
-
-//		LPUART_Print("Send");	  //header instruction
-//		LPUART1->TDR = errorbuffer[10];
-//		LPUART1->TDR = errorbuffer[11];
-//		LPUART_Print_Char('\n');
+//		write(FP_ID + '0'); for debugging
+		FPIDrdy = 1;
+		//return FP_ID;
 	} else if (ConfirmationCode == 0x01) {
 		lcd_set_cursor_position(0, 0);
 		str_write("Error During    ");
