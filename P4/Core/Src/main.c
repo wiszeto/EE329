@@ -69,23 +69,32 @@ int main(void) {
 		//need to make 2 other parameters; start and tardy time
 		while (AT_Flag) { //keep asking for user inputs until time is reached change to while so i can debug
 			FP_search();
+			delay_us(2000000);
 		}
 
 		if (EX_Flag) {
-			GPIOB->BSRR = GPIO_PIN_7;
-			uint32_t exportIndex = 0;
-			while (exportIndex < MEM_GLOBAL) { //sends data from lowest byte to highest byte
-				LPUART_FPID(); //transmits ID to LPUART
-				for (int z = 0; z < 16; z ++){
-					while (!(LPUART1->ISR & USART_ISR_TXE));
-					LPUART1->TDR = USER_INPUT_NAME[exportIndex][z];
-				}
-				exportIndex++;	//increments array
-				while (!(LPUART1->ISR & USART_ISR_TXE));
-				LPUART1->TDR = '\n';
-			}
-			EX_Flag = 0;
+		    GPIOB->BSRR = GPIO_PIN_7;
+		    uint32_t exportIndex = 0;
+
+		    while (exportIndex < MEM_GLOBAL) { //sends data from lowest byte to highest byte
+		        char message[17];
+		        for (int z = 0; z < 16; z ++) {
+		            message[z] = USER_INPUT_NAME[exportIndex][z];
+		        }
+		        message[16] = '\0'; // null terminate the string
+		        LPUART_Print("Get");
+		        LPUART_Print(message);
+		        while (!(LPUART1->ISR & USART_ISR_TXE));
+		        LPUART1->TDR = ',';
+		        while (!(LPUART1->ISR & USART_ISR_TXE));
+		        LPUART1->TDR = exportIndex + '0';
+		        exportIndex++; //increments array
+		        while (!(LPUART1->ISR & USART_ISR_TXE));
+		        LPUART1->TDR = '\n';
+		    }
+		    EX_Flag = 0;
 		}
+
 
 //		delay_us(100000);
 //		GPIOB->BRR = GPIO_PIN_7;

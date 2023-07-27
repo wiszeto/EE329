@@ -190,9 +190,9 @@ void FP_search(void) {
 		FP_ID = errorbuffer[10] + errorbuffer[11]; //gets pageID = location of FP stored in FLASH
 		LPUART_Print("Send");	  //header instruction
 		delay_us(10000);
-		LPUART1->TDR = errorbuffer[10];
+		LPUART1->TDR = errorbuffer[10] + '0';
 		delay_us(10000);
-		LPUART1->TDR = errorbuffer[11];
+		LPUART1->TDR = errorbuffer[11] + '0';
 		delay_us(10000);
 		LPUART_Print_Char('\n');
 		lcd_set_cursor_position(0, 0);

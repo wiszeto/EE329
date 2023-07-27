@@ -264,3 +264,137 @@ Finished building: default.size.stdout
  
 Finished building: P4.list
  
+00:01:50 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/FP_process.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/FP_process.d" -MT"Core/Src/FP_process.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/FP_process.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:197:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  197 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+../Core/Src/FP_process.c: In function 'FP_search':
+../Core/Src/FP_process.c:191:3: warning: implicit declaration of function 'LPUART_Print' [-Wimplicit-function-declaration]
+  191 |   LPUART_Print("Send");   //header instruction
+      |   ^~~~~~~~~~~~
+../Core/Src/FP_process.c:197:3: warning: implicit declaration of function 'LPUART_Print_Char' [-Wimplicit-function-declaration]
+  197 |   LPUART_Print_Char('\n');
+      |   ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10280	     32	   2696	  13008	   32d0	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+00:10:36 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:201:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  201 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10284	     32	   2696	  13012	   32d4	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+05:25:30 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:204:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  204 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10072	     32	   2688	  12792	   31f8	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+05:29:30 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:204:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  204 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10068	     32	   2688	  12788	   31f4	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+05:32:10 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:205:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  205 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10072	     32	   2688	  12792	   31f8	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
+05:44:59 **** Incremental Build of configuration Debug for project P4 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4A6xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:26:5: warning: built-in function 'index' declared as non-function [-Wbuiltin-declaration-mismatch]
+   26 | int index = 0;
+      |     ^~~~~
+../Core/Src/main.c: In function 'LPUART_FPID':
+../Core/Src/main.c:205:17: warning: assignment to 'uint16_t' {aka 'volatile short unsigned int'} from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+  205 |    LPUART1->TDR = FP_ID_string; // Send the FP_ID as a string
+      |                 ^
+arm-none-eabi-gcc -o "P4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Wilso\Desktop\Code\C\P4\STM32L4A6ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P4.elf
+ 
+arm-none-eabi-size   P4.elf 
+arm-none-eabi-objdump -h -S  P4.elf  > "P4.list"
+   text	   data	    bss	    dec	    hex	filename
+  10080	     32	   2688	  12800	   3200	P4.elf
+Finished building: default.size.stdout
+ 
+Finished building: P4.list
+ 
